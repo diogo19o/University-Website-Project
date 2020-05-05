@@ -5,7 +5,7 @@ import { ManageProjectsComponent} from './manage-projects/manage-projects.compon
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'project',
     children: [
       { path: 'mypersonnelprojects', component: MyPersonnelProjectsComponent },
       { path: 'manageprojects', component:  ManageProjectsComponent},

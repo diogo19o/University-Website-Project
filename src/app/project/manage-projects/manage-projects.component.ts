@@ -33,6 +33,7 @@ export class ManageProjectsComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
     });
+    this.manageProjectsForm.clearAsyncValidators();
   }
 
   private updateForm(project: Project): void {
