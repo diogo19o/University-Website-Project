@@ -4,10 +4,17 @@ import {navbarRoute} from './layouts/navbar/navbar.route';
 
 const LAYOUT_ROUTES = [navbarRoute]
 
-const routes: Routes = [...LAYOUT_ROUTES];
+const appRoutes: Routes = [
+  {
+    path: 'project',
+    loadChildren: './project/project.module#ProjectModule'
+  },
+  ...LAYOUT_ROUTES
+];
+
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

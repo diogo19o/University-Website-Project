@@ -1,0 +1,50 @@
+<div class="row justify-content-center panel-container">
+  <div class="col-8">
+    <div *ngIf="project">
+      <h2><span>Project</span> {{project.id}}</h2>
+      <hr>
+      <dl class="row-md entity-details">
+        <dt><span >Project Id</span></dt>
+        <dd>
+          <span>{{project.id}}</span>
+        </dd>
+        <dt><span >Project Name</span></dt>
+        <dd>
+          <span>{{project.projectName}}</span>
+        </dd>
+        <dt><span >Project Alias</span></dt>
+        <dd>
+          <span>{{project.projectAlias}}</span>
+        </dd>
+        <dt><span >Company Name</span></dt>
+        <dd>
+          <span>{{project.companyName}}</span>
+        </dd>
+        <dt><span>Company Address</span></dt>
+        <dd>
+          <span>{{project.companyAddress}}</span>
+        </dd>
+        <dt><span>City</span></dt>
+        <dd>
+          <span>{{project.city}}</span>
+        </dd>
+        <dt><span>State</span></dt>
+        <dd>
+          <span>{{project.state}}</span>
+        </dd>
+        <dt><span>Zip</span></dt>
+        <dd>
+          <span>{{project.zip}}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info margin-right-10">
+        <i class="fa fa-arrow-left"></i><span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/project/manageprojects', project.id, 'edit']" class="btn btn-primary">
+        <i class="fa fa-pencil"></i><span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

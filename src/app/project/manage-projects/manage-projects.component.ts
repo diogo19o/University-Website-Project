@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Project } from '../project.model';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {IProject, Project} from '../project.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {ManageProjectsDeleteDialogComponent} from './manage-projects-delete-dialog.component';
+
 
 @Component({
   selector: 'app-manage-projects',
@@ -8,48 +10,27 @@ import { Project } from '../project.model';
   styleUrls: ['./manage-projects.component.scss']
 })
 export class ManageProjectsComponent implements OnInit {
+  projects?: IProject[] = [];
 
-  manageProjectsForm: FormGroup;
-
-  constructor() { }
+  constructor(protected modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.createForm();
-    const project: Project = this.mockProject();
-    this.updateForm(project);
+    this.projects.push(this.mockProject(1));
+    this.projects.push(this.mockProject(2));
   }
 
-  public saveProject():void {
-    console.table(this.manageProjectsForm.getRawValue())
+  trackId(index: number, item: IProject): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    return item.id;
   }
 
-  private createForm() {
-    this.manageProjectsForm = new FormGroup({
-      projectName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      projectAlias: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      companyName: new FormControl('', [Validators.required]),
-      companyAddress: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
-      zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
-    });
-    this.manageProjectsForm.clearAsyncValidators();
+  delete(project: IProject): void {
+    const modalRef = this.modalService.open(ManageProjectsDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.project = project;
   }
 
-  private updateForm(project: Project): void {
-    this.manageProjectsForm.patchValue({
-      projectName: project.projectName,
-      projectAlias: project.projectAlias,
-      companyName: project.companyName,
-      companyAddress: project.companyAddress,
-      state: project.state,
-      city: project.city,
-      zip: project.zip
-    });
+  private mockProject(id: number): Project  {
+    return new Project(id, 'Project X', 'X', 'ULHT', 'Campo Grande 25', 'Lisboa', 'Lisboa', '1234-234');
   }
 
-
-  private mockProject(): Project  {
-    return new Project(1, 'Project X', 'X', 'ULHT', 'Campo Grande 25', 'Lisboa', 'Lisboa', '1234-234');
-  }
 }

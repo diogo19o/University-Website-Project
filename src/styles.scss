@@ -1,14 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
-
-.form-container {
+.panel-container {
   padding: 1.5rem;
   margin-right: 0;
   margin-left: 0;
   border-width: .2rem;
 }
 
-//MARGINS AND PADDINGS GO HERE - USE THEM ELSEWHERE AND PLAGUES WILL FALL UPON YOU
-//All margin and padding values are available from -250 to 300
+i {
+  margin-right: 10px;
+}
+
+body,
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 300;
+}
+
+/* ==========================================================================
+Entity Details Page CSSS
+========================================================================== */
+.row.entity-details > {
+  dd {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .row.entity-details > {
+    dt {
+      margin-bottom: 15px;
+    }
+    dd {
+      border-bottom: 1px solid #eee;
+      padding-left: 180px;
+      margin-left: 0;
+    }
+  }
+}
+
+/*MARGINS AND PADDINGS GO HERE - USE THEM ELSEWHERE AND PLAGUES WILL FALL UPON YOU
+All margin and padding values are available from -250 to 300 */
 
 $pixels: 300;
 

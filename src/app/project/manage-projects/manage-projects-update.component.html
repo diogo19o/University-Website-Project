@@ -1,0 +1,81 @@
+<div class="panel-container">
+  <form [formGroup]="manageProjectsForm" (ngSubmit)="saveProject()">
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputProjectName">Project Name</label>
+        <input type="text" class="form-control" [ngClass]="manageProjectsForm.get('projectName').invalid && (manageProjectsForm.get('projectName').dirty || manageProjectsForm.get('projectName').touched) && manageProjectsForm.controls['projectName'].errors ? 'is-invalid' : ''"
+               id="inputProjectName" placeholder="Project Name" formControlName="projectName">
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('projectName').invalid && (manageProjectsForm.get('projectName').dirty || manageProjectsForm.get('projectName').touched)">
+          <span *ngIf="manageProjectsForm.controls['projectName'].hasError('required')">This field is required</span>
+          <span *ngIf="manageProjectsForm.controls['projectName'].hasError('maxlength')">Max length of this field is 50 characters</span>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputProjectAlias">Project Alias</label>
+        <input type="text" class="form-control" [ngClass]="manageProjectsForm.get('projectAlias').invalid && (manageProjectsForm.get('projectAlias').dirty || manageProjectsForm.get('projectAlias').touched) && manageProjectsForm.controls['projectAlias'].errors ? 'is-invalid' : ''"
+               id="inputProjectAlias" placeholder="Project Alias" formControlName="projectAlias">
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('projectAlias').invalid && (manageProjectsForm.get('projectAlias').dirty || manageProjectsForm.get('projectAlias').touched)">
+          <span *ngIf="manageProjectsForm.controls['projectAlias'].hasError('required')">This field is required</span>
+          <span *ngIf="manageProjectsForm.controls['projectAlias'].hasError('maxlength')">Max length of this field is 10 characters</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputCompanyName">Company Name</label>
+        <input type="text" class="form-control" [ngClass]="manageProjectsForm.get('companyName').invalid && (manageProjectsForm.get('companyName').dirty || manageProjectsForm.get('companyName').touched) && manageProjectsForm.controls['companyName'].errors ? 'is-invalid' : ''"
+               id="inputCompanyName" placeholder="Company Name" formControlName="companyName">
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('companyName').invalid && (manageProjectsForm.get('companyName').dirty || manageProjectsForm.get('companyName').touched)">
+          <span *ngIf="manageProjectsForm.controls['companyName'].hasError('required')">This field is required</span>
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputCompanyAddress">Company Address</label>
+        <input type="text" class="form-control" [ngClass]="manageProjectsForm.get('companyAddress').invalid && (manageProjectsForm.get('companyAddress').dirty || manageProjectsForm.get('companyAddress').touched) && manageProjectsForm.controls['companyAddress'].errors ? 'is-invalid' : ''"
+               id="inputCompanyAddress" placeholder="Company Address" formControlName="companyAddress">
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('companyAddress').invalid && (manageProjectsForm.get('companyAddress').dirty || manageProjectsForm.get('companyAddress').touched)">
+          <span *ngIf="manageProjectsForm.controls['companyAddress'].hasError('required')">This field is required</span>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputCity">City</label>
+        <input type="text" class="form-control" [ngClass]="manageProjectsForm.get('city').invalid && (manageProjectsForm.get('city').dirty || manageProjectsForm.get('city').touched) && manageProjectsForm.controls['city'].errors ? 'is-invalid' : ''"
+               id="inputCity" placeholder="City" formControlName="city">
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('city').invalid && (manageProjectsForm.get('city').dirty || manageProjectsForm.get('city').touched)">
+          <span *ngIf="manageProjectsForm.controls['city'].hasError('required')">This field is required</span>
+        </div>
+      </div>
+      <div class="form-group col-md-4 mb-4">
+        <label for="inputState">State</label>
+        <select id="inputState" class="form-control" [ngClass]="manageProjectsForm.get('state').invalid && (manageProjectsForm.get('state').dirty || manageProjectsForm.get('state').touched) && manageProjectsForm.controls['state'].errors ? 'is-invalid' : ''"
+                formControlName="state">
+          <option>Lisboa</option>
+          <option>Amadora</option>
+          <option>Mafra</option>
+        </select>
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('state').invalid && (manageProjectsForm.get('state').dirty || manageProjectsForm.get('state').touched)">
+          <span *ngIf="manageProjectsForm.controls['state'].hasError('required')">This field is required</span>
+        </div>
+      </div>
+      <div class="form-group col-md-2 mb-2">
+        <label for="inputZip">Zip</label>
+        <input type="text" class="form-control" [ngClass]="manageProjectsForm.get('zip').invalid && (manageProjectsForm.get('zip').dirty || manageProjectsForm.get('zip').touched) && manageProjectsForm.controls['zip'].errors ? 'is-invalid' : ''"
+               id="inputZip" placeholder="XXXX-ZZZ" formControlName="zip">
+        <div class="invalid-feedback" *ngIf="manageProjectsForm.get('zip').invalid && (manageProjectsForm.get('zip').dirty || manageProjectsForm.get('zip').touched)">
+          <span *ngIf="manageProjectsForm.controls['zip'].hasError('required')">This field is required</span>
+          <span *ngIf="manageProjectsForm.controls['zip'].hasError('maxlength')">Max length of this field is 8 characters</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="button" id="cancel-save" class="btn btn-secondary margin-right-10" (click)="previousState()">
+        <i class="fa fa-ban"></i><span>Cancel</span>
+      </button>
+      <button type="submit" id="save-entity" [disabled]="manageProjectsForm.invalid || isSaving" class="btn btn-primary">
+        <i class="fa fa-save"></i><span>Save</span>
+      </button>
+    </div>
+  </form>
+</div>
