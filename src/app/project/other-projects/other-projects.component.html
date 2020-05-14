@@ -1,0 +1,24 @@
+<div class="panel-container">
+  <h2>
+    <span>Other Projects</span>
+  </h2>
+  <hr>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="projects?.length === 0">
+    <span>No projects found</span>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-4 mt-3" *ngFor="let project of projects; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ project.projectName }} - {{ project.projectName }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Company: {{ project.companyName }}</h6>
+          <p class="card-text">You can find us at: {{ project.companyAddress }}, {{ project.city }}.</p>
+          <p class="card-text">CEP: {{ project.zip }}, {{ project.state }}.</p>
+          <a class="card-link" [routerLink]="['/project/manageprojects', project.id, 'view']">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

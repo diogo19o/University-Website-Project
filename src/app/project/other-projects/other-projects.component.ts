@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ProjectService } from '../project.service';
 import { IProject } from '../project.model';
+import { ProjectService } from '../project.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-my-personnel-projects',
-  templateUrl: './my-personnel-projects.component.html',
-  styleUrls: ['./my-personnel-projects.component.scss']
+  selector: 'app-other-projects',
+  templateUrl: './other-projects.component.html',
+  styleUrls: ['./other-projects.component.scss']
 })
-export class MyPersonnelProjectsComponent implements OnInit {
+export class OtherProjectsComponent implements OnInit {
 
   projects: IProject[] | null = null;
 
@@ -16,7 +16,7 @@ export class MyPersonnelProjectsComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.projectService.getProjectsByType(true).subscribe(data => {
+    this.projectService.getProjectsByType(false).subscribe(data => {
       this.spinner.hide();
       this.projects = data;
     });

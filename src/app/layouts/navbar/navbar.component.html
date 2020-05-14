@@ -1,4 +1,4 @@
-<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark fixed-top">
   <a class="navbar-brand" [routerLink]="['/']">
     <img src="../../../assets/images/linkedin_logo.png" width="50" height="50" alt="Logo image">
   </a>
@@ -21,7 +21,7 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" [routerLink]="['project/mypersonnelprojects']">My Personnel Projects</a>
-          <a class="dropdown-item" href="#">Other Projects</a>
+          <a class="dropdown-item" [routerLink]="['project/otherprojects']">Other Projects</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" [routerLink]="['project/manageprojects']">Manage Projects</a>
         </div>

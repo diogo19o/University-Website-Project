@@ -21,6 +21,4 @@ export class NavbarComponent implements OnInit {
       searchKey: new FormControl(''),
     });
   }
-
-
 }

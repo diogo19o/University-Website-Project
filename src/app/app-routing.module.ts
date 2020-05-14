@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {navbarRoute} from './layouts/navbar/navbar.route';
+import { navbarRoute } from './layouts/navbar/navbar.route';
 
 const LAYOUT_ROUTES = [navbarRoute]
 
@@ -14,7 +14,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

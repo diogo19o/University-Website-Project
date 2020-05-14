@@ -7,6 +7,7 @@ import { ManageProjectsUpdateComponent } from './manage-projects/manage-projects
 import { ManageProjectsDetailComponent } from './manage-projects/manage-projects-detail.component';
 import { ManageProjectsDeleteDialogComponent } from './manage-projects/manage-projects-delete-dialog.component';
 import { MyPersonnelProjectsComponent } from './my-personnel-projects/my-personnel-projects.component';
+import { OtherProjectsComponent } from './other-projects/other-projects.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { MyPersonnelProjectsComponent } from './my-personnel-projects/my-personn
     ManageProjectsUpdateComponent,
     ManageProjectsDetailComponent,
     ManageProjectsDeleteDialogComponent,
-    MyPersonnelProjectsComponent
+    MyPersonnelProjectsComponent,
+    OtherProjectsComponent
   ],
   imports: [
     CommonModule,

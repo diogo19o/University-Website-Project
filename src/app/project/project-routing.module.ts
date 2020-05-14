@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ProjectResolver } from './project.resolver';
 import { MyPersonnelProjectsComponent } from './my-personnel-projects/my-personnel-projects.component';
 import { ManageProjectsComponent } from './manage-projects/manage-projects.component';
 import { ManageProjectsUpdateComponent } from './manage-projects/manage-projects-update.component';
 import { ManageProjectsDetailComponent } from './manage-projects/manage-projects-detail.component';
-import { ProjectResolver } from './project.resolver';
+import { OtherProjectsComponent } from './other-projects/other-projects.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'mypersonnelprojects',
         component:  MyPersonnelProjectsComponent
+      },
+      {
+        path: 'otherprojects',
+        component:  OtherProjectsComponent
       },
     ]
   }

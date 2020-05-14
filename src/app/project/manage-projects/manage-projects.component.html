@@ -21,6 +21,7 @@
           <th scope="col" ><span>Project Alias</span></th>
           <th scope="col" ><span>Company Name</span></th>
           <th scope="col" ><span>City</span></th>
+          <th class="text-center" scope="col" ><span>Personnel Project</span></th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -31,6 +32,9 @@
           <td>{{ project.projectAlias }}</td>
           <td>{{ project.companyName }}</td>
           <td>{{ project.city }}</td>
+          <td class="text-center">
+              <i class="fa" [ngClass]="(project.personnelProject) ? 'fa-check' : 'fa-times'"></i>
+          </td>
           <td class="text-right">
             <div class="btn-group">
               <button type="submit" [routerLink]="[project.id, 'view']" class="btn btn-info btn-sm">

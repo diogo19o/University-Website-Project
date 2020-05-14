@@ -4,7 +4,7 @@
       <h2><span>Project</span> {{project.id}}</h2>
       <hr>
       <dl class="row-md entity-details">
-        <dt><span >Project Id</span></dt>
+        <dt><span >ID</span></dt>
         <dd>
           <span>{{project.id}}</span>
         </dd>
@@ -35,6 +35,12 @@
         <dt><span>Zip</span></dt>
         <dd>
           <span>{{project.zip}}</span>
+        </dd>
+        <dt><span>Personnel Project</span></dt>
+        <dd>
+          <span>
+            <i class="fa" [ngClass]="(project.personnelProject) ? 'fa-check' : 'fa-times'"></i>
+          </span>
         </dd>
       </dl>
 
