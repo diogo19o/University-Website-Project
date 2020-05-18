@@ -22,7 +22,9 @@ export class ProjectResolver implements Resolve<IProject> {
             this.router.navigate(['404']);
             return null;
           }
-        }), take(1));
+        }, err => {
+          this.spinner.hide();
+      }), take(1));
     }
     return of(new Project());
   }

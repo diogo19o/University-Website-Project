@@ -19,6 +19,8 @@ export class MyPersonnelProjectsComponent implements OnInit {
     this.projectService.getProjectsByType(true).subscribe(data => {
       this.spinner.hide();
       this.projects = data;
+    }, err => {
+      this.spinner.hide();
     });
   }
 

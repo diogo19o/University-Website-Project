@@ -21,6 +21,8 @@ export class ManageProjectsComponent implements OnInit {
     this.projectService.getProjects().subscribe((data: IProject[])  => {
       this.spinner.hide();
       this.projects = data;
+    }, err => {
+      this.spinner.hide();
     });
   }
 

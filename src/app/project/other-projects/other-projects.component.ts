@@ -19,6 +19,8 @@ export class OtherProjectsComponent implements OnInit {
     this.projectService.getProjectsByType(false).subscribe(data => {
       this.spinner.hide();
       this.projects = data;
+    }, err => {
+      this.spinner.hide();
     });
   }
 
