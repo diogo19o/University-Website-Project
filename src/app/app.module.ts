@@ -8,6 +8,7 @@ import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { HomeModule } from './home/home.module';
 import { ProjectModule } from './project/project.module';
+import { EducationModule } from './education/education.module';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFireModule } from '@angular/fire';
@@ -41,6 +42,7 @@ export const firebaseConfig = {
     SharedModule,
     HomeModule,
     ProjectModule,
+    EducationModule,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       preventDuplicates: true

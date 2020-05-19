@@ -15,15 +15,25 @@
         </a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle" href="#" id="projectNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-gears"></i>
           <span>Projects</span>
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" [routerLink]="['project/mypersonnelprojects']">My Personnel Projects</a>
-          <a class="dropdown-item" [routerLink]="['project/otherprojects']">Other Projects</a>
+        <div class="dropdown-menu" aria-labelledby="projectNavbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/project/mypersonnelprojects']">My Personnel Projects</a>
+          <a class="dropdown-item" [routerLink]="['/project/otherprojects']">Other Projects</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" [routerLink]="['project/manageprojects']">Manage Projects</a>
+          <a class="dropdown-item" [routerLink]="['/project/manageprojects']">Manage Projects</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="educationNavbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-graduation-cap"></i>
+          <span>Education</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="educationNavbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/education/manageacademicstudies']">Manage Academic Studies</a>
+          <a class="dropdown-item" [routerLink]="['/education/maangecertifications']">Manage Certifications</a>
         </div>
       </li>
       <li class="nav-item">

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { map, take} from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { IProject, Project } from './project.model';
 import { ProjectService } from './project.service';
 import { NgxSpinnerService } from 'ngx-spinner';

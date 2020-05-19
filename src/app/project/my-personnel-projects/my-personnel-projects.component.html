@@ -12,7 +12,7 @@
       <div class="col-md-4 mt-3" *ngFor="let project of projects; let i = index">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title">{{ project.projectName }} - {{ project.projectName }}</h5>
+            <h5 class="card-title">{{ project.projectName }} - {{ project.projectAlias }}</h5>
             <h6 class="card-subtitle mb-2 text-muted">Company: {{ project.companyName }}</h6>
             <p class="card-text">You can find us at: {{ project.companyAddress }}, {{ project.city }}.</p>
             <p class="card-text">CEP: {{ project.zip }}, {{ project.state }}.</p>
