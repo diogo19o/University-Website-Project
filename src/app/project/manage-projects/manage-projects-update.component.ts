@@ -62,6 +62,10 @@ export class ManageProjectsUpdateComponent implements OnInit {
     (this.manageProjectsForm.get(['projectTeam']) as FormArray).push(this.createProjectTeamFormGroup());
   }
 
+  deleteProjectTeamMember(index: number): void {
+    (this.manageProjectsForm.get(['projectTeam']) as FormArray).removeAt(index);
+  }
+
   get projectTeamControls(): Array<AbstractControl> {
     return (this.manageProjectsForm.get('projectTeam') as FormArray).controls;
   }
@@ -78,6 +82,7 @@ export class ManageProjectsUpdateComponent implements OnInit {
       city: this.manageProjectsForm.get(['city']).value,
       zip: this.manageProjectsForm.get(['zip']).value,
       personnelProject: this.manageProjectsForm.get(['personnelProject']).value,
+      projectTeam: this.manageProjectsForm.get(['projectTeam']).value
     };
     return entity;
   }
@@ -93,7 +98,7 @@ export class ManageProjectsUpdateComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
       personnelProject: new FormControl(false, [Validators.required]),
-      projectTeam: this.formBuilder.array([this.createProjectTeamFormGroup()])
+      projectTeam: this.formBuilder.array([])
     });
   }
 
@@ -103,7 +108,7 @@ export class ManageProjectsUpdateComponent implements OnInit {
       specialization: new FormControl('', [Validators.required, Validators.maxLength(50)]),
       name: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('', [Validators.required])
+      endDate: new FormControl('')
     });
   }
 
@@ -117,7 +122,8 @@ export class ManageProjectsUpdateComponent implements OnInit {
       state: project.state,
       city: project.city,
       zip: project.zip,
-      personnelProject: !project.personnelProject ? false : project.personnelProject
+      personnelProject: !project.personnelProject ? false : project.personnelProject,
+      projectTeam: project.projectTeam
     });
   }
 }

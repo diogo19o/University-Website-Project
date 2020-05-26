@@ -80,7 +80,7 @@
     <hr>
     <h4 id="project-team-members-heading">
       <span>Team Members</span>
-      <button id="new-team-member-btn" class="btn btn-primary float-right" (click)="addProjectTeamMember()">
+      <button type="button" id="new-team-member-btn" class="btn btn-primary float-right" (click)="addProjectTeamMember()">
         <i class="fa fa-plus"></i>
         <span>
           Add new project team member
@@ -88,10 +88,9 @@
       </button>
     </h4>
     <br/>
-    <div formArrayName="projectTeam">
-      <div class="table-responsive" *ngIf="projectTeamControls.length > 0">
-        <table class="table table-striped">
-          <thead>
+    <div class="table-responsive" *ngIf="projectTeamControls.length > 0">
+      <table class="table table-striped">
+        <thead>
           <tr>
             <th><span>ID</span></th>
             <th><span>Specialization</span></th>
@@ -100,14 +99,42 @@
             <th><span>End Date</span></th>
             <th></th>
           </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let productTeam of projectTeamControls; let i = index">
+        </thead>
+        <tbody>
+        <tr *ngFor="let productTeam of projectTeamControls; index as i;" formArrayName="projectTeam">
+          <ng-container [formGroupName]="i">
             <td>{{productTeam.get('id').value}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+            <td>
+              <select class="form-control" name="specialization-{{i}}" id="specialization-{{i}}" formControlName="specialization">
+                <option value="PM">Project Manager</option>
+                <option value="TECH_ARCH">Technical Architect</option>
+                <option value="DEVOPS">DevOps</option>
+                <option value="SD">Senior Developer</option>
+                <option value="D">Developer</option>
+                <option value="TM">Test Manager</option>
+                <option value="T">Tester</option>
+              </select>
+            </td>
+            <td>
+              <input type="text" class="form-control" name="name-{{i}}" id="name-{{i}}" formControlName="name"/>
+            </td>
+            <td>
+              <input type="date" class="form-control" name="startDate-{{i}}" id="startDate-{{i}}" formControlName="startDate"/>
+            </td>
+            <td>
+              <input type="date" class="form-control" name="endDate-{{i}}" id="endDate-{{i}}" formControlName="endDate"/>
+            </td>
+            <td class="text-right">
+              <div class="btn-group flex-btn-group-container">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteProjectTeamMember(i)">
+                  <i class="fa fa-times"></i>
+                  <span class="d-none d-md-inline"> Delete</span>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+        </tbody>
+      </table>
     </div>
     <div>
       <button type="button" id="cancel-save" class="btn btn-secondary margin-right-10" (click)="previousState()">
