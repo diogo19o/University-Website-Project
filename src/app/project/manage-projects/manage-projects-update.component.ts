@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {FormControl, FormGroup, FormBuilder, FormArray, Validators, AbstractControl} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProject, Project } from '../project.model';
 import { ToastrService } from 'ngx-toastr';
@@ -19,6 +19,7 @@ export class ManageProjectsUpdateComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     private projectService: ProjectService,
+    private formBuilder: FormBuilder,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -57,6 +58,14 @@ export class ManageProjectsUpdateComponent implements OnInit {
     window.history.back();
   }
 
+  addProjectTeamMember(): void {
+    (this.manageProjectsForm.get(['projectTeam']) as FormArray).push(this.createProjectTeamFormGroup());
+  }
+
+  get projectTeamControls(): Array<AbstractControl> {
+    return (this.manageProjectsForm.get('projectTeam') as FormArray).controls;
+  }
+
   private createProjectObject(): IProject {
     const entity = {
       ...new Project(),
@@ -83,7 +92,18 @@ export class ManageProjectsUpdateComponent implements OnInit {
       state: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
-      personnelProject: new FormControl(false, [Validators.required])
+      personnelProject: new FormControl(false, [Validators.required]),
+      projectTeam: this.formBuilder.array([this.createProjectTeamFormGroup()])
+    });
+  }
+
+  private createProjectTeamFormGroup(): FormGroup {
+    return new FormGroup({
+      id: new FormControl(''),
+      specialization: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      name: new FormControl('', [Validators.required, Validators.maxLength(250)]),
+      startDate: new FormControl('', [Validators.required]),
+      endDate: new FormControl('', [Validators.required])
     });
   }
 

@@ -8,6 +8,7 @@ export interface IProject {
   city?: string;
   zip?: string;
   personnelProject?: boolean;
+  projectTeam?: IProjectTeam[];
 }
 
 export class Project implements IProject {
@@ -20,6 +21,25 @@ export class Project implements IProject {
     public city?: string,
     public state?: string,
     public zip?: string,
-    public personnelProject?: boolean
+    public personnelProject?: boolean,
+    public projectTeam?: IProjectTeam[]
+  ) {}
+}
+
+export interface IProjectTeam {
+  id?: string;
+  specialization?: string;
+  name?: string;
+  startDate?: string;
+  endDate?: string;
+}
+
+export class ProjectTeam implements IProjectTeam {
+  constructor(
+    public id?: string,
+    public specialization?: string,
+    public name?: string,
+    public startDate?: string,
+    public endDate?: string
   ) {}
 }
