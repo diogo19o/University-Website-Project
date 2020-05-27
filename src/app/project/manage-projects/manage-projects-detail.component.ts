@@ -21,4 +21,32 @@ export class ManageProjectsDetailComponent implements OnInit {
   previousState(): void {
     window.history.back();
   }
+
+  getMemberSpecializationByValue(memberSpecialization: string): string {
+    let translatedSpec = '';
+    switch (memberSpecialization) {
+      case 'PM':
+        translatedSpec = 'Project Manager';
+        break;
+      case 'TECH_ARCH':
+        translatedSpec = 'Technical Architect';
+        break;
+      case 'DEVOPS':
+        translatedSpec = 'DevOps';
+        break;
+      case 'SD':
+        translatedSpec = 'Senior Developer';
+        break;
+      case 'D':
+        translatedSpec = 'Developer';
+        break;
+      case 'TM':
+        translatedSpec = 'Test Manager';
+        break;
+      case 'T':
+        translatedSpec = 'Tester';
+        break;
+    }
+    return translatedSpec;
+  }
 }

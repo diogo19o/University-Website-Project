@@ -8,7 +8,7 @@ export interface IProject {
   city?: string;
   zip?: string;
   personnelProject?: boolean;
-  projectTeam?: IProjectTeam[];
+  projectTeamMembers?: IProjectTeamMember[];
 }
 
 export class Project implements IProject {
@@ -22,23 +22,23 @@ export class Project implements IProject {
     public state?: string,
     public zip?: string,
     public personnelProject?: boolean,
-    public projectTeam?: IProjectTeam[]
+    public projectTeamMembers?: IProjectTeamMember[]
   ) {}
 }
 
-export interface IProjectTeam {
+export interface IProjectTeamMember {
   id?: string;
-  specialization?: string;
-  name?: string;
+  memberSpecialization?: string;
+  memberName?: string;
   startDate?: string;
   endDate?: string;
 }
 
-export class ProjectTeam implements IProjectTeam {
+export class ProjectTeam implements IProjectTeamMember {
   constructor(
     public id?: string,
-    public specialization?: string,
-    public name?: string,
+    public memberSpecialization?: string,
+    public memberName?: string,
     public startDate?: string,
     public endDate?: string
   ) {}

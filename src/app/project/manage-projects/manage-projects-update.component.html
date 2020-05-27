@@ -88,24 +88,24 @@
       </button>
     </h4>
     <br/>
-    <div class="table-responsive" *ngIf="projectTeamControls.length > 0">
+    <div class="table-responsive" *ngIf="projectTeamMembersControls.length > 0">
       <table class="table table-striped">
         <thead>
           <tr>
             <th><span>ID</span></th>
-            <th><span>Specialization</span></th>
-            <th><span>Name</span></th>
+            <th><span>Member Specialization</span></th>
+            <th><span>Member Name</span></th>
             <th><span>Start Date</span></th>
             <th><span>End Date</span></th>
             <th></th>
           </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let productTeam of projectTeamControls; index as i;" formArrayName="projectTeam">
+        <tr *ngFor="let projectTeamMember of projectTeamMembersControls; index as i;" formArrayName="projectTeamMembers">
           <ng-container [formGroupName]="i">
-            <td>{{productTeam.get('id').value}}</td>
+            <td>{{projectTeamMember.get('id').value}}</td>
             <td>
-              <select class="form-control" name="specialization-{{i}}" id="specialization-{{i}}" formControlName="specialization">
+              <select class="form-control" name="memberSpecialization-{{i}}" id="memberSpecialization-{{i}}" formControlName="memberSpecialization">
                 <option value="PM">Project Manager</option>
                 <option value="TECH_ARCH">Technical Architect</option>
                 <option value="DEVOPS">DevOps</option>
@@ -116,7 +116,7 @@
               </select>
             </td>
             <td>
-              <input type="text" class="form-control" name="name-{{i}}" id="name-{{i}}" formControlName="name"/>
+              <input type="text" class="form-control" name="memberName-{{i}}" id="memberName-{{i}}" formControlName="memberName"/>
             </td>
             <td>
               <input type="date" class="form-control" name="startDate-{{i}}" id="startDate-{{i}}" formControlName="startDate"/>

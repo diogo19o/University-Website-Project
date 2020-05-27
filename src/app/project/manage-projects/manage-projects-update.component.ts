@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, FormBuilder, FormArray, Validators, AbstractControl} from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder, FormArray, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IProject, Project } from '../project.model';
+import { Project } from '../project.model';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectService } from '../project.service';
 
@@ -32,7 +32,7 @@ export class ManageProjectsUpdateComponent implements OnInit {
   saveProject(): void {
     this.isSaving = true;
     if (!this.manageProjectsForm.get(['id']).value) {
-      this.projectService.createProject(this.createProjectObject()).then(data => {
+      this.projectService.createProject(this.manageProjectsForm.getRawValue()).then(data => {
           this.isSaving = false;
           this.toastr.success('New Project successfully created', 'Success');
           this.router.navigate(['/manageprojects']);
@@ -42,7 +42,7 @@ export class ManageProjectsUpdateComponent implements OnInit {
           this.toastr.error('An error occurred while saving a new project', 'Error');
         });
     } else {
-      this.projectService.updateProject(this.createProjectObject()).then(() => {
+      this.projectService.updateProject(this.manageProjectsForm.getRawValue()).then(() => {
           this.isSaving = false;
           this.toastr.success('Project successfully updated', 'Success');
           this.router.navigate(['/manageprojects']);
@@ -59,32 +59,15 @@ export class ManageProjectsUpdateComponent implements OnInit {
   }
 
   addProjectTeamMember(): void {
-    (this.manageProjectsForm.get(['projectTeam']) as FormArray).push(this.createProjectTeamFormGroup());
+    (this.manageProjectsForm.get(['projectTeamMembers']) as FormArray).push(this.createProjectTeamMemberFormGroup());
   }
 
   deleteProjectTeamMember(index: number): void {
-    (this.manageProjectsForm.get(['projectTeam']) as FormArray).removeAt(index);
+    (this.manageProjectsForm.get(['projectTeamMembers']) as FormArray).removeAt(index);
   }
 
-  get projectTeamControls(): Array<AbstractControl> {
-    return (this.manageProjectsForm.get('projectTeam') as FormArray).controls;
-  }
-
-  private createProjectObject(): IProject {
-    const entity = {
-      ...new Project(),
-      id: this.manageProjectsForm.get(['id']).value,
-      projectName: this.manageProjectsForm.get(['projectName']).value,
-      projectAlias: this.manageProjectsForm.get(['projectAlias']).value,
-      companyName: this.manageProjectsForm.get(['companyName']).value,
-      companyAddress: this.manageProjectsForm.get(['companyAddress']).value,
-      state: this.manageProjectsForm.get(['state']).value,
-      city: this.manageProjectsForm.get(['city']).value,
-      zip: this.manageProjectsForm.get(['zip']).value,
-      personnelProject: this.manageProjectsForm.get(['personnelProject']).value,
-      projectTeam: this.manageProjectsForm.get(['projectTeam']).value
-    };
-    return entity;
+  get projectTeamMembersControls(): Array<AbstractControl> {
+    return (this.manageProjectsForm.get('projectTeamMembers') as FormArray).controls;
   }
 
   private createForm() {
@@ -98,15 +81,15 @@ export class ManageProjectsUpdateComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
       personnelProject: new FormControl(false, [Validators.required]),
-      projectTeam: this.formBuilder.array([])
+      projectTeamMembers: this.formBuilder.array([])
     });
   }
 
-  private createProjectTeamFormGroup(): FormGroup {
+  private createProjectTeamMemberFormGroup(): FormGroup {
     return new FormGroup({
       id: new FormControl(''),
-      specialization: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      name: new FormControl('', [Validators.required, Validators.maxLength(250)]),
+      memberSpecialization: new FormControl('', [Validators.required, Validators.maxLength(50)]),
+      memberName: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       startDate: new FormControl('', [Validators.required]),
       endDate: new FormControl('')
     });
@@ -122,8 +105,27 @@ export class ManageProjectsUpdateComponent implements OnInit {
       state: project.state,
       city: project.city,
       zip: project.zip,
-      personnelProject: !project.personnelProject ? false : project.personnelProject,
-      projectTeam: project.projectTeam
+      personnelProject: !project.personnelProject ? false : project.personnelProject
     });
+    this.createProjectTeamMemberFormArray(project)
+      .forEach(g => (this.manageProjectsForm.get('projectTeamMembers') as FormArray).push(g));
+  }
+
+  private createProjectTeamMemberFormArray(project: Project): FormGroup[] {
+    const fg: FormGroup[] = [];
+    if (!project.projectTeamMembers) {
+      project.projectTeamMembers = [];
+    }
+    project.projectTeamMembers.forEach(projectTeamMember => {
+      fg.push(this.formBuilder.group({
+          id: new FormControl(projectTeamMember.id),
+          memberSpecialization: new FormControl(projectTeamMember.memberSpecialization, [Validators.required, Validators.maxLength(50)]),
+          memberName: new FormControl(projectTeamMember.memberName, [Validators.required, Validators.maxLength(250)]),
+          startDate: new FormControl(projectTeamMember.startDate, [Validators.required]),
+          endDate: new FormControl(projectTeamMember.endDate)
+        })
+      );
+    });
+    return fg;
   }
 }

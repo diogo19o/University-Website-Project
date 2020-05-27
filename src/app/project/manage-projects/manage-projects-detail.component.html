@@ -1,40 +1,40 @@
 <div class="row justify-content-center panel-container">
   <div class="col-8">
     <div *ngIf="project">
-      <h2><span>Project</span> {{project.id}}</h2>
+      <h2><span>Project</span> {{ project.id }}</h2>
       <hr>
       <dl class="row-md entity-details">
         <dt><span >ID</span></dt>
         <dd>
-          <span>{{project.id}}</span>
+          <span>{{ project.id }}</span>
         </dd>
         <dt><span >Project Name</span></dt>
         <dd>
-          <span>{{project.projectName}}</span>
+          <span>{{ project.projectName }}</span>
         </dd>
         <dt><span >Project Alias</span></dt>
         <dd>
-          <span>{{project.projectAlias}}</span>
+          <span>{{ project.projectAlias }}</span>
         </dd>
         <dt><span >Company Name</span></dt>
         <dd>
-          <span>{{project.companyName}}</span>
+          <span>{{ project.companyName }}</span>
         </dd>
         <dt><span>Company Address</span></dt>
         <dd>
-          <span>{{project.companyAddress}}</span>
+          <span>{{ project.companyAddress }}</span>
         </dd>
         <dt><span>City</span></dt>
         <dd>
-          <span>{{project.city}}</span>
+          <span>{{ project.city }}</span>
         </dd>
         <dt><span>State</span></dt>
         <dd>
-          <span>{{project.state}}</span>
+          <span>{{ project.state }}</span>
         </dd>
         <dt><span>Zip</span></dt>
         <dd>
-          <span>{{project.zip}}</span>
+          <span>{{ project.zip }}</span>
         </dd>
         <dt><span>Personnel Project</span></dt>
         <dd>
@@ -43,6 +43,29 @@
           </span>
         </dd>
       </dl>
+      <div class="table-responsive" *ngIf="project.projectTeamMembers.length > 0">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th><span>ID</span></th>
+            <th><span>Member Specialization</span></th>
+            <th><span>Member Name</span></th>
+            <th><span>Start Date</span></th>
+            <th><span>End Date</span></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let productTeamMember of project.projectTeamMembers; index as i;">
+              <td>{{ productTeamMember.id }}</td>
+              <td>
+                {{ getMemberSpecializationByValue(productTeamMember.memberSpecialization) }}
+              </td>
+              <td>{{ productTeamMember.memberName }}</td>
+              <td>{{ productTeamMember.startDate }}</td>
+              <td>{{ productTeamMember.endDate }}</td>
+          </tbody>
+        </table>
+      </div>
 
       <button type="submit" (click)="previousState()" class="btn btn-info margin-right-10">
         <i class="fa fa-arrow-left"></i><span>Back</span>

@@ -43,11 +43,13 @@ export class ProjectService {
   public async createProject(project: IProject): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     project.id = this.af.createId();
+    project.projectTeamMembers.forEach(ptm => ptm.id = this.af.createId());
     return await this.af.collection(ProjectService.PROJECT_KEY).doc(project.id).set(project);
   }
 
   public async updateProject(project: IProject): Promise<void> {
     const currentUser = firebase.auth().currentUser;
+    project.projectTeamMembers.filter(ptm => !ptm.id).forEach(ptmFiltered => ptmFiltered.id = this.af.createId());
     return await this.af.collection(ProjectService.PROJECT_KEY).doc(project.id).set(project);
   }
 
