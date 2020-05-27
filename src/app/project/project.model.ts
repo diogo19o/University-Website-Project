@@ -34,7 +34,7 @@ export interface IProjectTeamMember {
   endDate?: string;
 }
 
-export class ProjectTeam implements IProjectTeamMember {
+export class ProjectTeamMember implements IProjectTeamMember {
   constructor(
     public id?: string,
     public memberSpecialization?: string,
@@ -43,3 +43,4 @@ export class ProjectTeam implements IProjectTeamMember {
     public endDate?: string
   ) {}
 }
+
