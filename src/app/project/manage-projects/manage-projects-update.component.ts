@@ -81,7 +81,8 @@ export class ManageProjectsUpdateComponent implements OnInit {
       city: new FormControl('', [Validators.required]),
       zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
       personnelProject: new FormControl(false, [Validators.required]),
-      projectTeamMembers: this.formBuilder.array([])
+      formRecaptcha: new FormControl(null, [Validators.required]),
+      projectTeamMembers: this.formBuilder.array([]),
     });
   }
 

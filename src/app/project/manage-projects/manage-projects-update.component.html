@@ -136,7 +136,12 @@
         </tbody>
       </table>
     </div>
-    <div>
+    <div class="row margin-top-10">
+      <div class="col-12">
+        <re-captcha formControlName="formRecaptcha"></re-captcha>
+      </div>
+    </div>
+    <div class="margin-top-20">
       <button type="button" id="cancel-save" class="btn btn-secondary margin-right-10" (click)="previousState()">
         <i class="fa fa-ban"></i><span>Cancel</span>
       </button>
