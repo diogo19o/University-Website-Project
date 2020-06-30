@@ -18,7 +18,7 @@ import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS, RecaptchaSet
   providers: [
     {
       provide: RECAPTCHA_SETTINGS,
-      useValue: { siteKey: '6LdF5f4UAAAAAI3K-qdcszcg5ZSEAi5JvK9RF1yk' } as RecaptchaSettings,
+      useValue: { siteKey: '6Lc386oZAAAAABtdICAZbAcQF_Ugpu27DiYNVh0g' } as RecaptchaSettings,
     },
   ],
 })

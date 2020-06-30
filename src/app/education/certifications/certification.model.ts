@@ -6,7 +6,7 @@ export interface ICertification {
   issuingDate?: string;
   expireDate?: string;
   certCode?: string;
-  certUrl?: string
+  certUrl?: string;
 }
 
 export class Certification implements ICertification {

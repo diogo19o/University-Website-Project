@@ -7,7 +7,8 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist/my-linkedin",
+    "site": "pw-project-dsn-bb",
+    "public": "dist/pw-project",
     "ignore": [
       "firebase.json",
       "**/.*",

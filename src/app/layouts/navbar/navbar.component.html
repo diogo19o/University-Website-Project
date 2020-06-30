@@ -38,8 +38,11 @@
           <span>My Education</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="educationNavbarDropdown">
+          <a class="dropdown-item" [routerLink]="['/education/myacademicstudies']">My Academic Studies</a>
+          <a class="dropdown-item" [routerLink]="['/education/mycertifications']">My Certifications</a>
+          <div class="dropdown-divider"></div>
           <a class="dropdown-item" [routerLink]="['/education/manageacademicstudies']">Manage Academic Studies</a>
-          <a class="dropdown-item" [routerLink]="['/education/maangecertifications']">Manage Certifications</a>
+          <a class="dropdown-item" [routerLink]="['/education/managecertifications']">Manage Certifications</a>
         </div>
       </li>
       <li class="nav-item dropdown">

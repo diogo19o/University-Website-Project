@@ -19,14 +19,14 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 export const firebaseConfig = {
-  apiKey: 'AIzaSyC6-rA7XKvbCSOe4UiMx6K2vQ5s8RsuoRY',
-  authDomain: 'ulht-my-linkedin-pap.firebaseapp.com',
-  databaseURL: 'https://ulht-my-linkedin-pap.firebaseio.com',
-  projectId: 'ulht-my-linkedin-pap',
-  storageBucket: 'ulht-my-linkedin-pap.appspot.com',
-  messagingSenderId: '483673379096',
-  appId: '1:483673379096:web:fd26f03c8b376ac245ce6d',
-  measurementId: 'G-44S3MK86FG'
+  apiKey: 'AIzaSyASaeglxeG_R936sM9j1-MIgu7LXXPhnvI',
+  authDomain: 'pw-project-dsn-bb.firebaseapp.com',
+  databaseURL: 'https://pw-project-dsn-bb.firebaseio.com/',
+  projectId: 'pw-project-dsn-bb',
+  storageBucket: 'pw-project-dsn-bb.appspot.com',
+  messagingSenderId: '91787838551',
+  appId: '1:91787838551:web:f00c8d82976925e47c4f12',
+  measurementId: 'G-6013DGJKFB'
 };
 
 @NgModule({

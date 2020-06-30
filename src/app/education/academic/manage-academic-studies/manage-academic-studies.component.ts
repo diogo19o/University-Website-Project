@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ICertification} from '../../certifications/certification.model';
 
 @Component({
   selector: 'app-manage-academic-studies',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-academic-studies.component.scss']
 })
 export class ManageAcademicStudiesComponent implements OnInit {
+
+  certifications?: ICertification[] = [];
 
   constructor() { }
 
