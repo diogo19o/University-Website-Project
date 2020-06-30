@@ -24,7 +24,7 @@
       <div class="form-group col-md-6 mb-6">
         <label for="inputCompanyName">Organization Name</label>
         <input type="text" class="form-control" [ngClass]="manageCertificationsForm.get('companyName').invalid && (manageCertificationsForm.get('companyName').dirty || manageCertificationsForm.get('companyName').touched) && manageCertificationsForm.controls['companyName'].errors ? 'is-invalid' : ''"
-               id="inputCompanyName" placeholder="Company Name" formControlName="companyName">
+               id="inputCompanyName" placeholder="Organization Name" formControlName="companyName">
         <div class="invalid-feedback" *ngIf="manageCertificationsForm.get('companyName').invalid && (manageCertificationsForm.get('companyName').dirty || manageCertificationsForm.get('companyName').touched)">
           <span *ngIf="manageCertificationsForm.controls['companyName'].hasError('required')">This field is required</span>
         </div>
