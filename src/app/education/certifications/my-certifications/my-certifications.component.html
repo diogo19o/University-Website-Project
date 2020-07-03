@@ -3,4 +3,21 @@
     <span>My Certifications</span>
   </h2>
   <hr>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="certifications?.length === 0">
+    <span>No projects found</span>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-4 mt-3" *ngFor="let certification of certifications; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ certification.certName }} - {{ certification.certCode }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Issuing Date: {{ certification.issuingDate }}</h6>
+          <p class="card-text">Organization: {{ certification.issuingOrg }}</p>
+          <a class="card-link" [routerLink]="['/education/managecertifications', certification.id, 'view']">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

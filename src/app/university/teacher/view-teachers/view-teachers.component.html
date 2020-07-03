@@ -1,0 +1,21 @@
+<div class="panel-container">
+  <h2>
+    <span>Teachers View</span>
+  </h2>
+  <hr>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="teachers?.length === 0">
+    <span>No teachers found</span>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-4 mt-3" *ngFor="let teacher of teachers; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ teacher.teacherName }} - {{ teacher.teacherSpecialization }}</h5>
+          <a class="card-link" [routerLink]="['/education/managecertifications', teacher.id, 'view']">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

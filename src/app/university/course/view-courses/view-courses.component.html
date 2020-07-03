@@ -1,0 +1,21 @@
+<div class="panel-container">
+  <h2>
+    <span>Courses View</span>
+  </h2>
+  <hr>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="courses?.length === 0">
+    <span>No projects found</span>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-4 mt-3" *ngFor="let course of courses; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ course.courseName }} - {{ course.type }}</h5>
+          <a class="card-link" [routerLink]="['/education/managecertifications', course.id, 'view']">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

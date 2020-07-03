@@ -1,0 +1,30 @@
+<div class="row justify-content-center panel-container">
+  <div class="col-8">
+    <div *ngIf="course">
+      <h2><span>certification</span> {{ course.id }}</h2>
+      <hr>
+      <dl class="row-md entity-details">
+        <dt><span >ID</span></dt>
+        <dd>
+          <span>{{ course.id }}</span>
+        </dd>
+        <dt><span >Course Name</span></dt>
+        <dd>
+          <span>{{ course.courseName }}</span>
+        </dd>
+        <dt><span >Course Duration (Years)</span></dt>
+        <dd>
+          <span>{{ course.durationYear }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info margin-right-10">
+        <i class="fa fa-arrow-left"></i><span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/university/managecourses', course.id, 'edit']" class="btn btn-primary">
+        <i class="fa fa-pencil"></i><span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

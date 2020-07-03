@@ -1,0 +1,51 @@
+<div class="panel-container">
+  <h2>
+    <span>Manage Subjects</span>
+
+    <button id="create-entity" class="btn btn-primary float-right" [routerLink]="['new']">
+      <i class="fa fa-plus"></i>
+      <span>Add subject</span>
+    </button>
+  </h2>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="subjects?.length === 0">
+    <span>No subjects found</span>
+  </div>
+
+  <div class="table-responsive" id="projectsTable" *ngIf="subjects?.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+      <tr>
+        <th scope="col" ><span>ID</span></th>
+        <th scope="col" ><span>Subject Name</span></th>
+        <th scope="col" ><span>Type</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let subject of subjects ;trackBy: trackId">
+        <td><a [routerLink]="[subject.id, 'view']">{{ subject.id }}</a></td>
+        <td>{{ subject.subjectName }}</td>
+        <td>{{ subject.type }}</td>
+        <td class="text-right">
+          <div class="btn-group">
+            <button type="submit" [routerLink]="[subject.id, 'view']" class="btn btn-info btn-sm">
+              <i class="fa fa-eye"></i>
+              <span class="d-none d-md-inline">View</span>
+            </button>
+
+            <button type="submit" [routerLink]="[subject.id, 'edit']" class="btn btn-primary btn-sm">
+              <i class="fa fa-pencil"></i>
+              <span class="d-none d-md-inline">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(subject)" class="btn btn-danger btn-sm">
+              <i class="fa fa-times"></i>
+              <span class="d-none d-md-inline">Delete</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

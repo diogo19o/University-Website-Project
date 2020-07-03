@@ -1,0 +1,49 @@
+<div class="panel-container">
+  <form [formGroup]="manageTeachersForm" (ngSubmit)="saveTeacher()">
+    <div class="form-row">
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputTeacherName">Teacher Name</label>
+        <input type="text" class="form-control" id="inputTeacherName" formControlName="teacherName" placeholder="Teacher Name"
+               [ngClass]="isControlInvalid('teacherName') ? 'is-invalid' : '' ">
+        <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('teacherName', 'required')">
+          This field is required
+        </div>
+      </div>
+      <div class="form-group col-md-6 mb-6">
+        <label for="inputTeacherSpec">Teacher Specilization</label>
+        <input type="text" class="form-control" id="inputTeacherSpec" formControlName="teacherSpecialization" placeholder="Teacher Specialization"
+               [ngClass]="isControlInvalid('teacherSpecialization') ? 'is-invalid' : '' ">
+        <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('teacherSpecialization', 'required')">
+          This field is required
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3 mb-3">
+        <label for="startDate">Start Date</label>
+        <input type="date" class="form-control" id="startDate" formControlName="startDate"
+               [ngClass]="isControlInvalid('startDate') ? 'is-invalid' : '' ">
+      </div>
+      <div class="form-group col-md-3 mb-3">
+        <label for="endDate">End Date</label>
+        <input type="date" class="form-control" id="endDate" formControlName="endDate"
+               [ngClass]="isControlInvalid('endDate') ? 'is-invalid' : '' ">
+      </div>
+    </div>
+    <hr>
+    <div class="row margin-top-10">
+      <div class="col-12">
+        <re-captcha formControlName="formRecaptcha"></re-captcha>
+      </div>
+    </div>
+    <div class="margin-top-20">
+      <button type="button" id="cancel-save" class="btn btn-secondary margin-right-10" (click)="previousState()">
+        <i class="fa fa-ban"></i><span>Cancel</span>
+      </button>
+      <button type="submit" id="save-entity" [disabled]="manageTeachersForm.invalid || isSaving"
+              class="btn btn-primary">
+        <i class="fa fa-save"></i><span>Save</span>
+      </button>
+    </div>
+  </form>
+</div>

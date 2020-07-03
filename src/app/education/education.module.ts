@@ -8,6 +8,8 @@ import {MyAcademicStudiesComponent} from './academic/my-academic-studies/my-acad
 import {MyCertificationsComponent} from './certifications/my-certifications/my-certifications.component';
 import { ManageCertificationsUpdateComponent } from './certifications/manage-certifications/manage-certifications-update/manage-certifications-update.component';
 import { ManageAcademicStudiesUpdateComponent } from './academic/manage-academic-studies/manage-academic-studies-update/manage-academic-studies-update.component';
+import { ManageCertificationsDetailsComponent } from './certifications/manage-certifications/manage-certifications-details/manage-certifications-details.component';
+import { ManageCertificationsDeleteDialogComponent } from './certifications/manage-certifications/manage-certifications-delete-dialog/manage-certifications-delete-dialog.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ManageAcademicStudiesUpdateComponent } from './academic/manage-academic
     MyAcademicStudiesComponent,
     MyCertificationsComponent,
     ManageCertificationsUpdateComponent,
-    ManageAcademicStudiesUpdateComponent],
+    ManageAcademicStudiesUpdateComponent,
+    ManageCertificationsDetailsComponent,
+    ManageCertificationsDeleteDialogComponent],
   imports: [
     CommonModule,
     SharedModule,

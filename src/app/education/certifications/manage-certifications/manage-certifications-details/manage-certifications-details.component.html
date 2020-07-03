@@ -1,0 +1,42 @@
+<div class="row justify-content-center panel-container">
+  <div class="col-8">
+    <div *ngIf="certification">
+      <h2><span>certification</span> {{ certification.id }}</h2>
+      <hr>
+      <dl class="row-md entity-details">
+        <dt><span >ID</span></dt>
+        <dd>
+          <span>{{ certification.id }}</span>
+        </dd>
+        <dt><span >Certification Name</span></dt>
+        <dd>
+          <span>{{ certification.certName }}</span>
+        </dd>
+        <dt><span >Certification Code</span></dt>
+        <dd>
+          <span>{{ certification.certCode }}</span>
+        </dd>
+        <dt><span >Certification URL</span></dt>
+        <dd>
+          <span>{{ certification.certUrl }}</span>
+        </dd>
+        <dt><span>Issuing Organization</span></dt>
+        <dd>
+          <span>{{ certification.issuingOrg }}</span>
+        </dd>
+        <dt><span>Issuing Date</span></dt>
+        <dd>
+          <span>{{ certification.issuingDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info margin-right-10">
+        <i class="fa fa-arrow-left"></i><span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/education/managecertifications', certification.id, 'edit']" class="btn btn-primary">
+        <i class="fa fa-pencil"></i><span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -51,7 +51,13 @@
           <span>University</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="universityNavbarDropdown">
-
+          <a class="dropdown-item" [routerLink]="['/university/coursesview']">Courses</a>
+          <a class="dropdown-item" [routerLink]="['/university/teachersview']">Teachers</a>
+          <a class="dropdown-item" [routerLink]="['/university/subjectsview']">Subjects</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" [routerLink]="['/university/managecourses']">Manage Courses</a>
+          <a class="dropdown-item" [routerLink]="['/university/manageteachers']">Manage Teachers</a>
+          <a class="dropdown-item" [routerLink]="['/university/managesubjects']">Manage Subjects</a>
         </div>
       </li>
       <li class="nav-item">

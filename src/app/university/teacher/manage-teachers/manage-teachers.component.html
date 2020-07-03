@@ -1,0 +1,55 @@
+<div class="panel-container">
+  <h2>
+    <span>Manage Teachers</span>
+
+    <button id="create-entity" class="btn btn-primary float-right" [routerLink]="['new']">
+      <i class="fa fa-plus"></i>
+      <span>Add teacher</span>
+    </button>
+  </h2>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="teachers?.length === 0">
+    <span>No teachers found</span>
+  </div>
+
+  <div class="table-responsive" id="projectsTable" *ngIf="teachers?.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+      <tr>
+        <th scope="col" ><span>ID</span></th>
+        <th scope="col" ><span>Teacher Name</span></th>
+        <th scope="col" ><span>Specialization</span></th>
+        <th scope="col" ><span>Start Date</span></th>
+        <th scope="col" ><span>End Date</span></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let teacher of teachers ;trackBy: trackId">
+        <td><a [routerLink]="[teacher.id, 'view']">{{ teacher.id }}</a></td>
+        <td>{{ teacher.teacherName }}</td>
+        <td>{{ teacher.teacherSpecialization }}</td>
+        <td>{{ teacher.endDate }}</td>
+        <td>{{ teacher.endDate }}</td>
+        <td class="text-right">
+          <div class="btn-group">
+            <button type="submit" [routerLink]="[teacher.id, 'view']" class="btn btn-info btn-sm">
+              <i class="fa fa-eye"></i>
+              <span class="d-none d-md-inline">View</span>
+            </button>
+
+            <button type="submit" [routerLink]="[teacher.id, 'edit']" class="btn btn-primary btn-sm">
+              <i class="fa fa-pencil"></i>
+              <span class="d-none d-md-inline">Edit</span>
+            </button>
+
+            <button type="submit" (click)="delete(teacher)" class="btn btn-danger btn-sm">
+              <i class="fa fa-times"></i>
+              <span class="d-none d-md-inline">Delete</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

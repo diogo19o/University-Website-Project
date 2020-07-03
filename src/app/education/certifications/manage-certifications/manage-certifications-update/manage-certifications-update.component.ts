@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {ProjectService} from '../../../../project/project.service';
-import {Project} from '../../../../project/project.model';
 import {CertificationService} from '../../certification.service';
+import {Certification} from '../../certification.model';
 
 @Component({
   selector: 'app-manage-certifications-update',
@@ -30,27 +29,27 @@ export class ManageCertificationsUpdateComponent implements OnInit {
     });
   }
 
-  saveProject(): void {
+  saveCertification(): void {
     this.isSaving = true;
     if (!this.manageCertificationsForm.get(['id']).value) {
       this.certificationService.createCertification(this.manageCertificationsForm.getRawValue()).then(data => {
           this.isSaving = false;
-          this.toastr.success('New Project successfully created', 'Success');
+          this.toastr.success('New Certification successfully added', 'Success');
           this.router.navigate(['/managecertifications']);
         },
         err => {
           this.isSaving = false;
-          this.toastr.error('An error occurred while saving a new project', 'Error');
+          this.toastr.error('An error occurred while saving a new certification', 'Error');
         });
     } else {
       this.certificationService.updateCertification(this.manageCertificationsForm.getRawValue()).then(() => {
           this.isSaving = false;
-          this.toastr.success('Project successfully updated', 'Success');
+          this.toastr.success('Certification successfully updated', 'Success');
           this.router.navigate(['/managecertifications']);
         },
         err => {
           this.isSaving = false;
-          this.toastr.error('An error occurred while saving a new project', 'Error');
+          this.toastr.error('An error occurred while saving a new Certification', 'Error');
         });
     }
   }
@@ -59,82 +58,31 @@ export class ManageCertificationsUpdateComponent implements OnInit {
     window.history.back();
   }
 
-/*
-  addProjectTeamMember(): void {
-    (this.manageCertificationsForm.get(['projectTeamMembers']) as FormArray).push(this.createProjectTeamMemberFormGroup());
-  }
-
-  deleteProjectTeamMember(index: number): void {
-    (this.manageCertificationsForm.get(['projectTeamMembers']) as FormArray).removeAt(index);
-  }
-
-  get projectTeamMembersControls(): Array<AbstractControl> {
-    return (this.manageCertificationsForm.get('projectTeamMembers') as FormArray).controls;
-  }
- */
-
   private createForm() {
     this.manageCertificationsForm = new FormGroup({
       id: new FormControl(''),
-      projectName: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      projectAlias: new FormControl('', [Validators.required, Validators.maxLength(10)]),
-      companyName: new FormControl('', [Validators.required]),
-      companyAddress: new FormControl('', [Validators.required]),
-      state: new FormControl('', [Validators.required]),
-      city: new FormControl('', [Validators.required]),
-      zip: new FormControl('', [Validators.required,  Validators.maxLength(8)]),
-      personnelProject: new FormControl(false, [Validators.required]),
+      certName: new FormControl('', [Validators.required]),
+      issuingOrg: new FormControl('', [Validators.required]),
+      issuingDate: new FormControl('', [Validators.required])/*,
+      expires: new FormControl(false),
+      expireDate: new FormControl('')*/,
+      certCode: new FormControl('', [Validators.required,  Validators.maxLength(30)]),
+      certUrl: new FormControl(''),
       formRecaptcha: new FormControl(null, [Validators.required]),
-      projectTeamMembers: this.formBuilder.array([]),
     });
   }
 
-  private createProjectTeamMemberFormGroup(): FormGroup {
-    return new FormGroup({
-      id: new FormControl(''),
-      memberSpecialization: new FormControl('', [Validators.required, Validators.maxLength(50)]),
-      memberName: new FormControl('', [Validators.required, Validators.maxLength(250)]),
-      startDate: new FormControl('', [Validators.required]),
-      endDate: new FormControl('')
-    });
-  }
-
-  private updateForm(project: Project): void {
+  private updateForm(certification: Certification): void {
     this.manageCertificationsForm.patchValue({
-      id: project.id,
-      projectName: project.projectName,
-      projectAlias: project.projectAlias,
-      companyName: project.companyName,
-      companyAddress: project.companyAddress,
-      state: project.state,
-      city: project.city,
-      zip: project.zip,
-      personnelProject: !project.personnelProject ? false : project.personnelProject
+      id: certification.id,
+      certName: certification.certName,
+      issuingOrg: certification.issuingOrg,
+      issuingDate: certification.issuingDate,
+      expires: certification.expires,
+      expireDate: certification.expireDate,
+      certCode: certification.certCode,
+      certUrl: certification.certUrl
     });
-    /*
-    this.createProjectTeamMemberFormArray(project)
-      .forEach(g => (this.manageCertificationsForm.get('projectTeamMembers') as FormArray).push(g));
-     */
   }
-
-  /*
-  private createProjectTeamMemberFormArray(project: Project): FormGroup[] {
-    const fg: FormGroup[] = [];
-    if (!project.projectTeamMembers) {
-      project.projectTeamMembers = [];
-    }
-    project.projectTeamMembers.forEach(projectTeamMember => {
-      fg.push(this.formBuilder.group({
-          id: new FormControl(projectTeamMember.id),
-          memberSpecialization: new FormControl(projectTeamMember.memberSpecialization, [Validators.required, Validators.maxLength(50)]),
-          memberName: new FormControl(projectTeamMember.memberName, [Validators.required, Validators.maxLength(250)]),
-          startDate: new FormControl(projectTeamMember.startDate, [Validators.required]),
-          endDate: new FormControl(projectTeamMember.endDate)
-        })
-      );
-    });
-    return fg;
-  }
-   */
 
 }

@@ -17,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { UniversityModule } from './university/university.module';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyASaeglxeG_R936sM9j1-MIgu7LXXPhnvI',
@@ -52,7 +53,8 @@ export const firebaseConfig = {
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    UniversityModule
   ],
   providers: [],
   bootstrap: [MainComponent]
