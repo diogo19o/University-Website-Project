@@ -37,6 +37,7 @@ export class CourseService {
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
     course.courseTeachers.forEach(teacher => teacher.id = this.af.createId());
+    //testes
     course.courseTeachers.forEach(teacher => this.teacherService.createTeacher(teacher))
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
