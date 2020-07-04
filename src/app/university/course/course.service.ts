@@ -35,25 +35,30 @@ export class CourseService {
   public async createCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
-    course.courseTeachers.forEach(teacher => {
-      if (!teacher.id) {
-        course.courseTeachers.forEach(teacher => teacher.id = this.af.createId());
-        this.teacherService.createTeacher(teacher);
-      } else {
-        this.teacherService.updateTeacher(teacher);
-      }
-    });
+    this.teacherResolver(course);
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 
   public async updateCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
-    course.courseTeachers.filter(teacher => !teacher.id).forEach(courseFiltered => courseFiltered.id = this.af.createId());
+    course.courseTeachers.filter(teacher => !teacher.id).forEach(teacherFiltered => teacherFiltered.id = this.af.createId());
+    this.teacherResolver(course);
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 
   public async deleteCourse(courseId: string): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     return await this.af.collection(CourseService.COURSE_KEY).doc(courseId).delete();
+  }
+
+  public teacherResolver(course: ICourse){
+    course.courseTeachers.forEach(teacher => {
+      if (!teacher.id) {
+        teacher.id = this.af.createId();
+        this.teacherService.createTeacher(teacher);
+      } else {
+        this.teacherService.updateTeacher(teacher);
+      }
+    });
   }
 }
