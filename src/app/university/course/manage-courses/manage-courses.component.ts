@@ -4,6 +4,7 @@ import {NgxSpinnerService} from 'ngx-spinner';
 import {CourseService} from '../course.service';
 import {ICourse} from '../course.model';
 import {ManageCoursesDeleteDialogComponent} from './manage-courses-delete-dialog/manage-courses-delete-dialog.component';
+import {TeacherService} from '../../teacher/teacher.service';
 
 @Component({
   selector: 'app-manage-courses',
@@ -13,7 +14,7 @@ import {ManageCoursesDeleteDialogComponent} from './manage-courses-delete-dialog
 export class ManageCoursesComponent implements OnInit {
   courses?: ICourse[] = [];
 
-  constructor(protected modalService: NgbModal, private spinner: NgxSpinnerService, private  courseService: CourseService) { }
+  constructor(protected modalService: NgbModal, private spinner: NgxSpinnerService, private  courseService: CourseService, private teacherService:TeacherService) { }
 
   ngOnInit(): void {
     this.spinner.show();

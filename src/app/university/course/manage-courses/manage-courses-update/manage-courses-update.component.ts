@@ -4,6 +4,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Course} from '../../course.model';
 import {CourseService} from '../../course.service';
+import {Observable} from 'rxjs';
+import {ITeacher, Teacher} from '../../../teacher/teacher.model';
+import {TeacherService} from '../../../teacher/teacher.service';
 
 @Component({
   selector: 'app-manage-courses-update',
@@ -12,17 +15,22 @@ import {CourseService} from '../../course.service';
 })
 export class ManageCoursesUpdateComponent implements OnInit {
   manageCoursesForm: FormGroup;
+  public teachers: Array<ITeacher> = new Array<ITeacher>();
   isSaving: boolean;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     private courseService: CourseService,
+    private teacherService: TeacherService,
     private formBuilder: FormBuilder,
     private router: Router) { }
 
   ngOnInit(): void {
     this.createForm();
+    this.teacherService.getTeachers().subscribe((teacherModels:Array<ITeacher>) =>{
+      this.teachers = teacherModels
+    });
     this.activatedRoute.data.subscribe(({ course }) => {
       this.updateForm(course);
     });
@@ -116,11 +124,11 @@ export class ManageCoursesUpdateComponent implements OnInit {
     }
     course.courseTeachers.forEach(courseTeacher => {
       fg.push(this.formBuilder.group({
-          id: new FormControl(courseTeacher.id),
-          teacherName: new FormControl(courseTeacher.teacherName, [Validators.required, Validators.maxLength(250)]),
-          teacherSpecialization: new FormControl(courseTeacher.teacherSpecialization, [Validators.required, Validators.maxLength(50)]),
-          startDate: new FormControl(courseTeacher.startDate, [Validators.required]),
-          endDate: new FormControl(courseTeacher.endDate)
+          id: courseTeacher.id,
+          teacherName: courseTeacher.teacherName,
+          teacherSpecialization: courseTeacher.teacherSpecialization,
+          startDate: courseTeacher.startDate,
+          endDate: courseTeacher.endDate
         })
       );
     });
