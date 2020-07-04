@@ -34,7 +34,7 @@ export class CourseService {
   public async createCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
-    course.courseTeachers.forEach(ptm => ptm.id = this.af.createId());
+    course.courseTeachers.forEach(teacher => teacher.id = this.af.createId());
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 

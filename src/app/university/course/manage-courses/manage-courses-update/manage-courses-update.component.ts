@@ -29,8 +29,8 @@ export class ManageCoursesUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.teacherService.getTeachers().subscribe((teacherModels:Array<ITeacher>) =>{
-      this.teachers = teacherModels
+    this.teacherService.getTeachers().subscribe((teacherModels: Array<ITeacher>) => {
+      this.teachers = teacherModels;
     });
     this.activatedRoute.data.subscribe(({ course }) => {
       this.updateForm(course);
