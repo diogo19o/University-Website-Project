@@ -6,6 +6,8 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {ICourse} from './course.model';
+import {FormArray} from '@angular/forms';
+import {TeacherService} from '../teacher/teacher.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +18,7 @@ export class CourseService {
 
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(public af: AngularFirestore, public db: AngularFireDatabase, public angularAuth: AngularFireAuth) {
+  constructor(public af: AngularFirestore, public db: AngularFireDatabase, public angularAuth: AngularFireAuth, public teacherService: TeacherService) {
   }
 
   public getCourses(): Observable<Array<ICourse>> {
@@ -34,13 +36,14 @@ export class CourseService {
   public async createCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
-    course.courseTeachers.forEach(ptm => ptm.id = this.af.createId());
+    course.courseTeachers.forEach(teacher => teacher.id = this.af.createId());
+    course.courseTeachers.forEach(teacher => this.teacherService.createTeacher(teacher))
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 
   public async updateCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
-    course.courseTeachers.filter(ptm => !ptm.id).forEach(ptmFiltered => ptmFiltered.id = this.af.createId());
+    course.courseTeachers.filter(course => !course.id).forEach(courseFiltered => courseFiltered.id = this.af.createId());
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 

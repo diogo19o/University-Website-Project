@@ -4,10 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {Course} from '../../course.model';
 import {CourseService} from '../../course.service';
-import {Observable} from 'rxjs';
 import {ITeacher, Teacher} from '../../../teacher/teacher.model';
 import {TeacherService} from '../../../teacher/teacher.service';
-import {ManageTeachersUpdateComponent} from '../../../teacher/manage-teachers/manage-teachers-update/manage-teachers-update.component';
 
 @Component({
   selector: 'app-manage-courses-update',
@@ -135,6 +133,18 @@ export class ManageCoursesUpdateComponent implements OnInit {
       );
     });
     return fg;
+  }
+
+
+
+  fillFields(teacher : Teacher, index: number){
+    (this.manageCoursesForm.get(['courseTeachers']) as FormArray).at(index).setValue({
+      id: teacher.id,
+      teacherName: teacher.teacherName,
+      teacherSpecialization: teacher.teacherSpecialization,
+      startDate: teacher.startDate,
+      endDate: teacher.endDate
+    });
   }
 
 }

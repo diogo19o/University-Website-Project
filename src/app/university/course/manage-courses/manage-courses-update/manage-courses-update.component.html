@@ -67,9 +67,9 @@
               <input type="date" class="form-control" name="endDate-{{i}}" id="endDate-{{i}}" formControlName="endDate"/>
             </td>
             <td>
-              <select class="form-control" name="teacherName-{{i}}" id="teacherName-{{i}}" formControlName="teacherName">
+              <select class="form-control">
                 <option value="new"></option>
-                <option *ngFor="let teacher of teachers" class="form-control" value="PM">{{teacher.teacherName}}</option>
+                <option *ngFor="let teacher of teachers" class="form-control" value="PM" (click)="fillFields(teacher,i)">{{teacher.teacherName}}</option>
               </select>
             </td>
             <td class="text-right">
