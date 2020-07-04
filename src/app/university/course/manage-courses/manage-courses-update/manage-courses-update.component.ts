@@ -7,6 +7,7 @@ import {CourseService} from '../../course.service';
 import {Observable} from 'rxjs';
 import {ITeacher, Teacher} from '../../../teacher/teacher.model';
 import {TeacherService} from '../../../teacher/teacher.service';
+import {ManageTeachersUpdateComponent} from '../../../teacher/manage-teachers/manage-teachers-update/manage-teachers-update.component';
 
 @Component({
   selector: 'app-manage-courses-update',
@@ -107,6 +108,7 @@ export class ManageCoursesUpdateComponent implements OnInit {
 
   addCourseTeacher(): void {
     (this.manageCoursesForm.get(['courseTeachers']) as FormArray).push(this.createCourseTeacherFormGroup());
+    // this.teacherService.createTeacher(this.createCourseTeacherFormGroup())
   }
 
   deleteCourseTeacher(index: number): void {
@@ -124,11 +126,11 @@ export class ManageCoursesUpdateComponent implements OnInit {
     }
     course.courseTeachers.forEach(courseTeacher => {
       fg.push(this.formBuilder.group({
-          id: courseTeacher.id,
-          teacherName: courseTeacher.teacherName,
-          teacherSpecialization: courseTeacher.teacherSpecialization,
-          startDate: courseTeacher.startDate,
-          endDate: courseTeacher.endDate
+          id: new FormControl(courseTeacher.id),
+          teacherName: new FormControl(courseTeacher.teacherName),
+          teacherSpecialization: new FormControl(courseTeacher.teacherSpecialization),
+          startDate: new FormControl(courseTeacher.startDate),
+          endDate: new FormControl(courseTeacher.endDate)
         })
       );
     });

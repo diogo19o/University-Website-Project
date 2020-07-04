@@ -36,9 +36,9 @@ export class ManageTeachersUpdateComponent implements OnInit {
   public isControlInvalidAndHasError(formControlName: string, keyError: string): boolean {
     return this.isControlInvalid(formControlName) && this.manageTeachersForm.get(formControlName).errors
       && this.manageTeachersForm.get(formControlName).hasError(keyError);
-  }2
+  }
 
-  saveTeacher(): void {
+  public saveTeacher(): void {
     this.isSaving = true;
     if (!this.manageTeachersForm.get(['id']).value) {
       this.teacherService.createTeacher(this.manageTeachersForm.getRawValue()).then(data => {

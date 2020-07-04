@@ -46,7 +46,7 @@
           <th><span>Member Specialization</span></th>
           <th><span>Start Date</span></th>
           <th><span>End Date</span></th>
-          <th></th>
+          <th><span>Choose Existing</span></th>
         </tr>
         </thead>
         <tbody>
@@ -54,10 +54,7 @@
           <ng-container [formGroupName]="i">
             <td>{{ courseTeacher.get('id').value }}</td>
             <td>
-              <select class="form-control" name="teacherName-{{i}}" id="teacherName-{{i}}" formControlName="teacherName">
-                <option value="new"></option>
-                <option *ngFor="let teacher of teachers" class="form-control" value="PM">{{teacher.teacherName}}</option>
-              </select>
+              <input type="text" class="form-control" name="teacherName-{{i}}" id="teacherName-{{i}}" formControlName="teacherName"/>
             </td>
             <td>
               <input type="text" class="form-control" name="teacherSpecialization-{{i}}" id="teacherSpecialization-{{i}}" formControlName="teacherSpecialization"/>
@@ -68,6 +65,12 @@
             </td>
             <td>
               <input type="date" class="form-control" name="endDate-{{i}}" id="endDate-{{i}}" formControlName="endDate"/>
+            </td>
+            <td>
+              <select class="form-control" name="teacherName-{{i}}" id="teacherName-{{i}}" formControlName="teacherName">
+                <option value="new"></option>
+                <option *ngFor="let teacher of teachers" class="form-control" value="PM">{{teacher.teacherName}}</option>
+              </select>
             </td>
             <td class="text-right">
               <div class="btn-group flex-btn-group-container">
