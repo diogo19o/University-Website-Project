@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
@@ -6,7 +6,6 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {switchMap, takeUntil} from 'rxjs/operators';
 import * as firebase from 'firebase';
 import {ICourse} from './course.model';
-import {FormArray} from '@angular/forms';
 import {TeacherService} from '../teacher/teacher.service';
 
 @Injectable({
@@ -36,15 +35,20 @@ export class CourseService {
   public async createCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
-    course.courseTeachers.forEach(teacher => teacher.id = this.af.createId());
-    //testes
-    course.courseTeachers.forEach(teacher => this.teacherService.createTeacher(teacher))
+    course.courseTeachers.forEach(teacher => {
+      if (!teacher.id) {
+        course.courseTeachers.forEach(teacher => teacher.id = this.af.createId());
+        this.teacherService.createTeacher(teacher);
+      } else {
+        this.teacherService.updateTeacher(teacher);
+      }
+    });
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 
   public async updateCourse(course: ICourse): Promise<void> {
     const currentUser = firebase.auth().currentUser;
-    course.courseTeachers.filter(course => !course.id).forEach(courseFiltered => courseFiltered.id = this.af.createId());
+    course.courseTeachers.filter(teacher => !teacher.id).forEach(courseFiltered => courseFiltered.id = this.af.createId());
     return await this.af.collection(CourseService.COURSE_KEY).doc(course.id).set(course);
   }
 
