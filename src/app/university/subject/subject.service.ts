@@ -32,7 +32,7 @@ export class SubjectService {
   }
 
   public async createSubject(subject: ISubject): Promise<void> {
-    let getterTime = new Date();
+    const getterTime = new Date();
     subject.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     subject.id = this.af.createId();
@@ -40,7 +40,7 @@ export class SubjectService {
   }
 
   public async updateSubject(subject: ISubject): Promise<void> {
-    let getterTime = new Date();
+    const getterTime = new Date();
     subject.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     return await this.af.collection(SubjectService.SUBJECT_KEY).doc(subject.id).set(subject);

@@ -14,9 +14,6 @@ import {CourseService} from '../../../course/course.service';
   styleUrls: ['./manage-subjects-update.component.scss']
 })
 export class ManageSubjectsUpdateComponent implements OnInit {
-  public allCourses: Array<ICourse> = new Array<ICourse>();
-  manageSubjectsForm: FormGroup;
-  isSaving: boolean;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -26,6 +23,15 @@ export class ManageSubjectsUpdateComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router) {
   }
+
+  get subjectCoursesControls(): Array<AbstractControl> {
+    return (this.manageSubjectsForm.get('subjectCourses') as FormArray).controls;
+  }
+  public allCourses: Array<ICourse> = new Array<ICourse>();
+  manageSubjectsForm: FormGroup;
+  isSaving: boolean;
+
+  2;
 
   ngOnInit(): void {
     this.createForm();
@@ -46,8 +52,6 @@ export class ManageSubjectsUpdateComponent implements OnInit {
     return this.isControlInvalid(formControlName) && this.manageSubjectsForm.get(formControlName).errors
       && this.manageSubjectsForm.get(formControlName).hasError(keyError);
   }
-
-  2;
 
   saveSubject(): void {
     this.isSaving = true;
@@ -114,10 +118,6 @@ export class ManageSubjectsUpdateComponent implements OnInit {
     (this.manageSubjectsForm.get(['subjectCourses']) as FormArray).removeAt(index);
   }
 
-  get subjectCoursesControls(): Array<AbstractControl> {
-    return (this.manageSubjectsForm.get('subjectCourses') as FormArray).controls;
-  }
-
   private createSubjectCourseFormArray(subject: Subject): FormGroup[] {
     const fg: FormGroup[] = [];
     if (!subject.subjectCourses) {
@@ -127,7 +127,7 @@ export class ManageSubjectsUpdateComponent implements OnInit {
       fg.push(this.formBuilder.group({
           id: new FormControl(subjectCourse.id),
           courseName: new FormControl(subjectCourse.courseName),
-          //teacherSpecialization: new FormControl(subjectCourse.type),
+          // teacherSpecialization: new FormControl(subjectCourse.type),
           durationYear: new FormControl(subjectCourse.durationYear)
         })
       );

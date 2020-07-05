@@ -20,7 +20,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { UniversityModule } from './university/university.module';
 import { ContactsComponent } from './contacts/contacts.component';
 
-export var firebaseConfig = {
+export let firebaseConfig = {
   apiKey: 'AIzaSyBUKqSthyquIHqvXoP0foU9UgM0Srf5-k4',
   authDomain: 'pw-project-v2-dsn-bb.firebaseapp.com',
   databaseURL: 'https://pw-project-v2-dsn-bb.firebaseio.com',

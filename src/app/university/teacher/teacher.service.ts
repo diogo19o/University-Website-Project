@@ -34,14 +34,14 @@ export class TeacherService {
 
   public async createTeacher(teacher: ITeacher): Promise<void> {
     const currentUser = firebase.auth().currentUser;
-    let getterTime = new Date();
+    const getterTime = new Date();
     teacher.modifiedDate = getterTime.getTime();
     teacher.id = this.af.createId();
     return await this.af.collection(TeacherService.TEACHER_KEY).doc(teacher.id).set(teacher);
   }
 
   public async updateTeacher(teacher: ITeacher): Promise<void> {
-    let getterTime = new Date();
+    const getterTime = new Date();
     teacher.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     return await this.af.collection(TeacherService.TEACHER_KEY).doc(teacher.id).set(teacher);

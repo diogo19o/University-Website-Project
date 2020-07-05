@@ -23,7 +23,10 @@ export class HomeComponent implements OnInit {
   public lastSubject: ISubject;
   public lastCourse: ICourse;
 
-  constructor(private teacherService: TeacherService,private subjectService: SubjectService,private courseService: CourseService, private spinner: NgxSpinnerService) { }
+  constructor(private teacherService: TeacherService,
+              private subjectService: SubjectService,
+              private courseService: CourseService,
+              private spinner: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -40,7 +43,8 @@ export class HomeComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-    });this.courseService.getCourses().subscribe(data => {
+    });
+    this.courseService.getCourses().subscribe(data => {
       data.forEach(val => this.allCourses.push(Object.assign({}, val)));
       this.lastCourse = this.getLastModifiedCourse();
       this.spinner.hide();
@@ -52,7 +56,7 @@ export class HomeComponent implements OnInit {
   public getLastModifiedTeacher(): ITeacher {
     let lastModTeacher: ITeacher = this.allTeachers[0];
 
-    for (let teacher of this.allTeachers) {
+    for (const teacher of this.allTeachers) {
       if (teacher.modifiedDate >= lastModTeacher.modifiedDate) {
         lastModTeacher = teacher;
       }
@@ -64,7 +68,7 @@ export class HomeComponent implements OnInit {
   public getLastModifiedSubject(): ISubject {
     let lastModSubject: ISubject = this.allSubjects[0];
     console.log(lastModSubject.subjectName);
-    for (let subject of this.allSubjects) {
+    for (const subject of this.allSubjects) {
       if (subject.modifiedDate >= lastModSubject.modifiedDate) {
         console.log(lastModSubject.subjectName);
         lastModSubject = subject;
@@ -77,7 +81,7 @@ export class HomeComponent implements OnInit {
   public getLastModifiedCourse(): ICourse {
     let lastModCourse: ICourse = this.allCourses[0];
 
-    for (let course of this.allCourses) {
+    for (const course of this.allCourses) {
       if (course.modifiedDate >= lastModCourse.modifiedDate) {
         lastModCourse = course;
       }

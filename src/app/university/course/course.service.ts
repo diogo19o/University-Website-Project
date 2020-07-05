@@ -36,7 +36,7 @@ export class CourseService {
   }
 
   public async createCourse(course: ICourse, courses: ICourse[]): Promise<void> {
-    let getterTime = new Date();
+    const getterTime = new Date();
     course.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
@@ -45,7 +45,7 @@ export class CourseService {
   }
 
   public async updateCourse(course: ICourse): Promise<void> {
-    let getterTime = new Date();
+    const getterTime = new Date();
     course.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     course.courseTeachers.filter(teacher => !teacher.id).forEach(teacherFiltered => teacherFiltered.id = this.af.createId());
@@ -81,15 +81,15 @@ export class CourseService {
                 modifiedArray.push(teacherNew);
                 update = true;
               }else{
-                modifiedArray.push(teacher)
+                modifiedArray.push(teacher);
               }
-          })
+          });
           if (update) {
             this.af.collection(CourseService.COURSE_KEY).doc(course.id).update({
               courseTeachers: modifiedArray
             });
           }
-          modifiedArray = new Array<ITeacher>()
+          modifiedArray = new Array<ITeacher>();
         })
       );
     return new Promise(resolve => setTimeout(resolve, 300));

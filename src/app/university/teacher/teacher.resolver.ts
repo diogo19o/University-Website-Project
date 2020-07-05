@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { TeacherService } from './teacher.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {ITeacher,Teacher} from './teacher.model';
+import {ITeacher, Teacher} from './teacher.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherResolver implements Resolve<ITeacher> {
