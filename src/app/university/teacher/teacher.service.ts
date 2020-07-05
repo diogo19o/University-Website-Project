@@ -6,6 +6,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import {ITeacher} from './teacher.model';
+import {getTemplateRanges} from 'tslint/lib/rules/noConsecutiveBlankLinesRule';
 
 @Injectable({
   providedIn: 'root'
@@ -33,11 +34,15 @@ export class TeacherService {
 
   public async createTeacher(teacher: ITeacher): Promise<void> {
     const currentUser = firebase.auth().currentUser;
+    let getterTime = new Date();
+    teacher.modifiedDate = getterTime.getTime();
     teacher.id = this.af.createId();
     return await this.af.collection(TeacherService.TEACHER_KEY).doc(teacher.id).set(teacher);
   }
 
   public async updateTeacher(teacher: ITeacher): Promise<void> {
+    let getterTime = new Date();
+    teacher.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     return await this.af.collection(TeacherService.TEACHER_KEY).doc(teacher.id).set(teacher);
   }

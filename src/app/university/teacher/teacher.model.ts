@@ -4,6 +4,7 @@ export interface ITeacher {
   teacherSpecialization?: string;
   startDate?: string;
   endDate?: string;
+  modifiedDate?: number;
 }
 
 export class Teacher implements ITeacher {
@@ -12,6 +13,7 @@ export class Teacher implements ITeacher {
     public teacherName?: string,
     public teacherSpecialization?: string,
     public startDate?: string,
-    public endDate?: string
+    public endDate?: string,
+    public modifiedDate?: number
   ) {}
 }
