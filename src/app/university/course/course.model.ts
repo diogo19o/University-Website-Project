@@ -9,6 +9,7 @@ export interface ICourse {
   courseTeachers?: ITeacher[];
   courseTeachersID?: string[];
   courseSubjects?: ISubject[];
+  modifiedDate?: number;
 }
 
 export class Course implements ICourse {
@@ -19,6 +20,7 @@ export class Course implements ICourse {
     public durationYear?: number,
     public courseTeachers?: ITeacher[],
     public courseTeachersID?: string[],
-    public courseSubjects?: ISubject[]
+    public courseSubjects?: ISubject[],
+    public modifiedDate?: number
   ) {}
 }

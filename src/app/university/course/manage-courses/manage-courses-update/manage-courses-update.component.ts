@@ -103,7 +103,7 @@ export class ManageCoursesUpdateComponent implements OnInit {
       id: course.id,
       courseName: course.courseName,
       durationYear: course.durationYear
-    });1
+    });
     this.createCourseTeacherFormArray(course)
       .forEach(g => (this.manageCoursesForm.get('courseTeachers') as FormArray).push(g));
   }

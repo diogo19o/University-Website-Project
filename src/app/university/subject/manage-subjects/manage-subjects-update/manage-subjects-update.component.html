@@ -19,7 +19,55 @@
       </div>
     </div>
     <hr>
+    <h4 id="teachers-heading">
+      <span>Subject Courses</span>
+      <button type="button" id="new-teacher-btn" class="btn btn-primary float-right" (click)="addSubjectCourse()">
+        <i class="fa fa-plus"></i>
+        <span>
+          Add new Course
+        </span>
+      </button>
+    </h4>
     <br/>
+    <br/>
+    <div class="table-responsive" *ngIf="subjectCoursesControls.length > 0">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th><span>ID</span></th>
+          <th><span>Course Name</span></th>
+          <th><span>Duration Years</span></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let subjectCourse of subjectCoursesControls; index as i;" formArrayName="subjectCourses">
+          <ng-container [formGroupName]="i">
+            <td>{{ subjectCourse.get('id').value }}</td>
+            <td>
+              <input type="text" class="form-control" name="courseName-{{i}}" id="courseName-{{i}}" formControlName="courseName"/>
+            </td>
+            <td>
+              <input type="text" class="form-control" name="durationYear-{{i}}" id="durationYear-{{i}}" formControlName="durationYear"/>
+            </td>
+            <td>
+              <select class="form-control">
+                <option value="new"></option>
+                <option *ngFor="let course of allCourses" class="form-control" (click)="fillFieldsCourse(course,i)">{{course.courseName}}</option>
+              </select>
+            </td>
+            <td class="text-right">
+              <div class="btn-group flex-btn-group-container">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteSubjectCourse(i)">
+                  <i class="fa fa-times"></i>
+                  <span class="d-none d-md-inline"> Delete</span>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
     <div class="row margin-top-10">
       <div class="col-12">
         <re-captcha formControlName="formRecaptcha"></re-captcha>

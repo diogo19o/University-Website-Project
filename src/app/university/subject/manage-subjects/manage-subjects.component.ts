@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {ManageCoursesDeleteDialogComponent} from '../../course/manage-courses/manage-courses-delete-dialog/manage-courses-delete-dialog.component';
 import {ISubject} from '../subject.model';
 import {SubjectService} from '../subject.service';
 import {ManageSubjectsDeleteDialogComponent} from './manage-subjects-delete-dialog/manage-subjects-delete-dialog.component';

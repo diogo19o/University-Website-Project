@@ -4,7 +4,9 @@
   <div class="mt-5 jumbotron">
     <div class="container">
       <h1 class="display-3">PW Project</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+      <p>This is a template for a simple marketing or informational website. It includes a large callout called a
+        jumbotron and three supporting pieces of content. Use it as a starting point to create something more
+        unique.</p>
       <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
     </div>
   </div>
@@ -18,74 +20,70 @@
       <div class="col-md-4">
 
         <h2>Teachers <span class="badge badge-primary">New</span></h2>
-        <dl class="row-md entity-details">
-          <dt><span >Name</span></dt>
-          <dd>
-            <span>{{ lastTeacher.teacherName }}</span>
-          </dd>
-          <dt><span >Specialization</span></dt>
-          <dd>
-            <span>{{ lastTeacher.teacherSpecialization }}</span>
-          </dd>
-          <dt><span >Start Date</span></dt>
-          <dd>
-            <span>{{ lastTeacher.startDate }}</span>
-          </dd>
-          <dt><span>End Date</span></dt>
-          <dd>
-            <span>{{ lastTeacher.endDate }}</span>
-          </dd>
-        </dl>
+        <div *ngIf="allTeachers.length > 0">
+          <dl class="row-md entity-details">
+            <dt><span>Name</span></dt>
+            <dd>
+              <span>{{ lastTeacher.teacherName }}</span>
+            </dd>
+            <dt><span>Specialization</span></dt>
+            <dd>
+              <span>{{ lastTeacher.teacherSpecialization }}</span>
+            </dd>
+            <dt><span>Start Date</span></dt>
+            <dd>
+              <span>{{ lastTeacher.startDate }}</span>
+            </dd>
+            <dt><span>End Date</span></dt>
+            <dd>
+              <span>{{ lastTeacher.endDate }}</span>
+            </dd>
 
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+          </dl>
+          <p><a class="btn btn-secondary" [routerLink]="['manageteachers/', lastTeacher.id, 'view']"
+                     role="button">View details »</a></p>
+        </div>
       </div>
       <div class="col-md-4">
         <h2>Subjects <span class="badge badge-primary">New</span></h2>
-        <dl class="row-md entity-details">
-          <dt><span >Name</span></dt>
-          <dd>
-            <span>{{ lastTeacher.teacherName }}</span>
-          </dd>
-          <dt><span >Specialization</span></dt>
-          <dd>
-            <span>{{ lastTeacher.teacherSpecialization }}</span>
-          </dd>
-          <dt><span >Start Date</span></dt>
-          <dd>
-            <span>{{ lastTeacher.startDate }}</span>
-          </dd>
-          <dt><span>End Date</span></dt>
-          <dd>
-            <span>{{ lastTeacher.endDate }}</span>
-          </dd>
-        </dl>        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+        <div *ngIf="allSubjects.length > 0">
+          <dl class="row-md entity-details">
+            <dt><span>Name</span></dt>
+            <dd>
+              <span>{{ lastSubject.subjectName }}</span>
+            </dd>
+            <dt><span>Type</span></dt>
+            <dd>
+              <span>{{ lastSubject.type }}</span>
+            </dd>
+
+          </dl>
+          <p><a class="btn btn-secondary" [routerLink]="['managesubjects/', lastSubject.id, 'view']"
+                role="button">View details »</a></p>
+        </div>
       </div>
       <div class="col-md-4">
         <h2>Courses <span class="badge badge-primary">New</span></h2>
-        <dl class="row-md entity-details">
-          <dt><span >Name</span></dt>
-          <dd>
-            <span>{{ lastTeacher.teacherName }}</span>
-          </dd>
-          <dt><span >Specialization</span></dt>
-          <dd>
-            <span>{{ lastTeacher.teacherSpecialization }}</span>
-          </dd>
-          <dt><span >Start Date</span></dt>
-          <dd>
-            <span>{{ lastTeacher.startDate }}</span>
-          </dd>
-          <dt><span>End Date</span></dt>
-          <dd>
-            <span>{{ lastTeacher.endDate }}</span>
-          </dd>
-        </dl>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
+        <div *ngIf="allCourses.length > 0">
+          <dl class="row-md entity-details">
+            <dt><span>Name</span></dt>
+            <dd>
+              <span>{{ lastCourse.courseName }}</span>
+            </dd>
+            <dt><span>Specialization</span></dt>
+            <dd>
+              <span>{{ lastCourse.durationYear }}</span>
+            </dd>
+
+          </dl>
+          <p><a class="btn btn-secondary" [routerLink]="['managecourses/', lastCourse.id, 'view']"
+                role="button">View details »</a></p>
+        </div>
       </div>
     </div>
 
     <hr>
 
-  </div> <!-- /container -->
+  </div>
 
 </main>

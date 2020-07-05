@@ -36,6 +36,8 @@ export class CourseService {
   }
 
   public async createCourse(course: ICourse, courses: ICourse[]): Promise<void> {
+    let getterTime = new Date();
+    course.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
     this.teacherResolver(course);
@@ -43,6 +45,8 @@ export class CourseService {
   }
 
   public async updateCourse(course: ICourse): Promise<void> {
+    let getterTime = new Date();
+    course.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
     course.courseTeachers.filter(teacher => !teacher.id).forEach(teacherFiltered => teacherFiltered.id = this.af.createId());
     this.teacherResolver(course);
