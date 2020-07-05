@@ -3,10 +3,13 @@ import {Observable, Subject} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {switchMap, takeUntil} from 'rxjs/operators';
+import {first, switchMap, takeUntil} from 'rxjs/operators';
 import * as firebase from 'firebase';
-import {ICourse} from './course.model';
+import {Course, ICourse} from './course.model';
+import {ITeacher} from '../teacher/teacher.model';
 import {TeacherService} from '../teacher/teacher.service';
+import {ManageCoursesComponent} from './manage-courses/manage-courses.component';
+import {isBoolean} from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +35,7 @@ export class CourseService {
     return this.af.collection<ICourse>(CourseService.COURSE_KEY).doc(courseId).valueChanges();
   }
 
-  public async createCourse(course: ICourse): Promise<void> {
+  public async createCourse(course: ICourse, courses: ICourse[]): Promise<void> {
     const currentUser = firebase.auth().currentUser;
     course.id = this.af.createId();
     this.teacherResolver(course);
@@ -51,14 +54,40 @@ export class CourseService {
     return await this.af.collection(CourseService.COURSE_KEY).doc(courseId).delete();
   }
 
-  public teacherResolver(course: ICourse){
-    course.courseTeachers.forEach(teacher => {
+  public async teacherResolver(course: ICourse) {
+    for (const teacher of course.courseTeachers) {
       if (!teacher.id) {
         teacher.id = this.af.createId();
-        this.teacherService.createTeacher(teacher);
+        await this.teacherService.createTeacher(teacher);
       } else {
-        this.teacherService.updateTeacher(teacher);
+        await this.teacherService.updateTeacher(teacher);
+        await this.syncCourses(teacher);
       }
-    });
+    }
+  }
+
+  public syncCourses(teacherNew: ITeacher) {
+    let modifiedArray: Array<ITeacher> = new Array<ITeacher>();
+    let update = false;
+    this.af.collection<ICourse>(CourseService.COURSE_KEY).valueChanges()
+      .subscribe(courses =>
+        courses.forEach(course => {
+          course.courseTeachers.forEach(teacher => {
+              if (teacher.id == teacherNew.id) {
+                modifiedArray.push(teacherNew);
+                update = true;
+              }else{
+                modifiedArray.push(teacher)
+              }
+          })
+          if (update) {
+            this.af.collection(CourseService.COURSE_KEY).doc(course.id).update({
+              courseTeachers: modifiedArray
+            });
+          }
+          modifiedArray = new Array<ITeacher>()
+        })
+      );
+    return new Promise(resolve => setTimeout(resolve, 300));
   }
 }

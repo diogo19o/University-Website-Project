@@ -12,7 +12,7 @@ import {TeacherService} from '../../teacher/teacher.service';
   styleUrls: ['./manage-courses.component.scss']
 })
 export class ManageCoursesComponent implements OnInit {
-  courses?: ICourse[] = [];
+  public courses?: ICourse[] = [];
 
   constructor(protected modalService: NgbModal, private spinner: NgxSpinnerService, private  courseService: CourseService, private teacherService:TeacherService) { }
 

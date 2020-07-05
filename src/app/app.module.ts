@@ -20,16 +20,16 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { UniversityModule } from './university/university.module';
 import { ContactsComponent } from './contacts/contacts.component';
 
-export const firebaseConfig = {
-  apiKey: 'AIzaSyASaeglxeG_R936sM9j1-MIgu7LXXPhnvI',
-  authDomain: 'pw-project-dsn-bb.firebaseapp.com',
-  databaseURL: 'https://pw-project-dsn-bb.firebaseio.com/',
-  projectId: 'pw-project-dsn-bb',
-  storageBucket: 'pw-project-dsn-bb.appspot.com',
-  messagingSenderId: '91787838551',
-  appId: '1:91787838551:web:f00c8d82976925e47c4f12',
-  measurementId: 'G-6013DGJKFB'
+export var firebaseConfig = {
+  apiKey: 'AIzaSyBUKqSthyquIHqvXoP0foU9UgM0Srf5-k4',
+  authDomain: 'pw-project-v2-dsn-bb.firebaseapp.com',
+  databaseURL: 'https://pw-project-v2-dsn-bb.firebaseio.com',
+  projectId: 'pw-project-v2-dsn-bb',
+  storageBucket: 'pw-project-v2-dsn-bb.appspot.com',
+  messagingSenderId: '1059573046838',
+  appId: '1:1059573046838:web:47a7190e5b1e7691144297'
 };
+
 
 @NgModule({
   declarations: [

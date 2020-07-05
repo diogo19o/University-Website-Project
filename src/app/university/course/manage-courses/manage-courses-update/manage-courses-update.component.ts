@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
-import {Course} from '../../course.model';
+import {Course, ICourse} from '../../course.model';
 import {CourseService} from '../../course.service';
 import {ITeacher, Teacher} from '../../../teacher/teacher.model';
 import {TeacherService} from '../../../teacher/teacher.service';
@@ -14,7 +14,8 @@ import {TeacherService} from '../../../teacher/teacher.service';
 })
 export class ManageCoursesUpdateComponent implements OnInit {
   manageCoursesForm: FormGroup;
-  public teachers: Array<ITeacher> = new Array<ITeacher>();
+  public allTeachers: Array<ITeacher> = new Array<ITeacher>();
+  public allCourses: Array<ICourse> = new Array<ICourse>();
   isSaving: boolean;
 
   constructor(
@@ -27,8 +28,11 @@ export class ManageCoursesUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.teacherService.getTeachers().subscribe((teacherModels: Array<ITeacher>) => {
-      this.teachers = teacherModels;
+    this.teacherService.getTeachers().subscribe((teachers: Array<ITeacher>) => {
+      this.allTeachers = teachers;
+    });
+    this.courseService.getCourses().subscribe((courses: Array<ITeacher>) => {
+      this.allCourses = courses;
     });
     this.activatedRoute.data.subscribe(({ course }) => {
       this.updateForm(course);
@@ -48,7 +52,7 @@ export class ManageCoursesUpdateComponent implements OnInit {
   saveCourse(): void {
     this.isSaving = true;
     if (!this.manageCoursesForm.get(['id']).value) {
-      this.courseService.createCourse(this.manageCoursesForm.getRawValue()).then(data => {
+      this.courseService.createCourse(this.manageCoursesForm.getRawValue(),this.allCourses).then(data => {
           this.isSaving = false;
           this.toastr.success('New Course successfully added', 'Success');
           this.router.navigate(['/managecourses']);
@@ -99,7 +103,7 @@ export class ManageCoursesUpdateComponent implements OnInit {
       id: course.id,
       courseName: course.courseName,
       durationYear: course.durationYear
-    });
+    });1
     this.createCourseTeacherFormArray(course)
       .forEach(g => (this.manageCoursesForm.get('courseTeachers') as FormArray).push(g));
   }

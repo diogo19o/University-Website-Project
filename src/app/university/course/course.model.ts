@@ -7,6 +7,7 @@ export interface ICourse {
   type?: string;
   durationYear?: number;
   courseTeachers?: ITeacher[];
+  courseTeachersID?: string[];
   courseSubjects?: ISubject[];
 }
 
@@ -17,6 +18,7 @@ export class Course implements ICourse {
     public type?: string,
     public durationYear?: number,
     public courseTeachers?: ITeacher[],
+    public courseTeachersID?: string[],
     public courseSubjects?: ISubject[]
   ) {}
 }

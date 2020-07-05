@@ -70,7 +70,7 @@
             <td>
               <select class="form-control">
                 <option value="new"></option>
-                <option *ngFor="let teacher of teachers" class="form-control" value="PM" (click)="fillFields(teacher,i)">{{teacher.teacherName}}</option>
+                <option *ngFor="let teacher of allTeachers" class="form-control" value="PM" (click)="fillFields(teacher,i)">{{teacher.teacherName}}</option>
               </select>
             </td>
             <td class="text-right">
