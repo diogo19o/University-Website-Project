@@ -23,7 +23,8 @@ export class HomeComponent implements OnInit {
   public lastSubject: ISubject;
   public lastCourse: ICourse;
 
-  constructor(private teacherService: TeacherService,private subjectService: SubjectService,private courseService: CourseService, private spinner: NgxSpinnerService) { }
+  constructor(private teacherService: TeacherService, private subjectService: SubjectService, private courseService: CourseService, private spinner: NgxSpinnerService) {
+  }
 
   ngOnInit(): void {
     this.spinner.show();
@@ -40,7 +41,8 @@ export class HomeComponent implements OnInit {
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
-    });this.courseService.getCourses().subscribe(data => {
+    });
+    this.courseService.getCourses().subscribe(data => {
       data.forEach(val => this.allCourses.push(Object.assign({}, val)));
       this.lastCourse = this.getLastModifiedCourse();
       this.spinner.hide();
@@ -57,20 +59,17 @@ export class HomeComponent implements OnInit {
         lastModTeacher = teacher;
       }
     }
-
     return lastModTeacher;
   }
 
   public getLastModifiedSubject(): ISubject {
     let lastModSubject: ISubject = this.allSubjects[0];
-    console.log(lastModSubject.subjectName);
+
     for (let subject of this.allSubjects) {
       if (subject.modifiedDate >= lastModSubject.modifiedDate) {
-        console.log(lastModSubject.subjectName);
         lastModSubject = subject;
       }
     }
-
     return lastModSubject;
   }
 
@@ -82,7 +81,6 @@ export class HomeComponent implements OnInit {
         lastModCourse = course;
       }
     }
-
     return lastModCourse;
   }
 

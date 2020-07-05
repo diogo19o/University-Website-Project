@@ -7,6 +7,7 @@ import {Subject} from '../../subject.model';
 import {ITeacher, Teacher} from '../../../teacher/teacher.model';
 import {Course, ICourse} from '../../../course/course.model';
 import {CourseService} from '../../../course/course.service';
+import {log} from 'util';
 
 @Component({
   selector: 'app-manage-subjects-update',
@@ -136,10 +137,11 @@ export class ManageSubjectsUpdateComponent implements OnInit {
   }
 
   fillFieldsCourse(course: Course, index: number) {
+    console.log(course),
     (this.manageSubjectsForm.get(['subjectCourses']) as FormArray).at(index).setValue({
       id: course.id,
       courseName: course.courseName,
-      durationYear: course.durationYear,
+      durationYear: course.durationYear
     });
   }
 

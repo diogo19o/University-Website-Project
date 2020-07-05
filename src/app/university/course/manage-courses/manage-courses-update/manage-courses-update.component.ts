@@ -61,7 +61,7 @@ export class ManageCoursesUpdateComponent implements OnInit {
   saveCourse(): void {
     this.isSaving = true;
     if (!this.manageCoursesForm.get(['id']).value) {
-      this.courseService.createCourse(this.manageCoursesForm.getRawValue(), this.allCourses).then(data => {
+      this.courseService.createCourse(this.manageCoursesForm.getRawValue()).then(data => {
           this.isSaving = false;
           this.toastr.success('New Course successfully added', 'Success');
           this.router.navigate(['/managecourses']);
@@ -152,7 +152,6 @@ export class ManageCoursesUpdateComponent implements OnInit {
   }
 
   get courseSubjectsControls(): Array<AbstractControl> {
-    // return new Array<AbstractControl>();
     return (this.manageCoursesForm.get('courseSubjects') as FormArray).controls;
   }
 
@@ -182,7 +181,7 @@ export class ManageCoursesUpdateComponent implements OnInit {
     course.courseSubjects.forEach(courseSubject => {
       fg.push(this.formBuilder.group({
           id: new FormControl(courseSubject.id),
-          subjectsName: new FormControl(courseSubject.subjectName),
+          subjectName: new FormControl(courseSubject.subjectName),
           type: new FormControl(courseSubject.type),
         })
       );

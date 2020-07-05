@@ -6,17 +6,18 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import * as firebase from 'firebase';
 import {ISubject} from './subject.model';
+import {UniversityService} from '../university.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubjectService {
 
-  private static SUBJECT_KEY = 'subject';
+  public static SUBJECT_KEY = 'subject';
 
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(public af: AngularFirestore, public db: AngularFireDatabase, public angularAuth: AngularFireAuth) {
+  constructor(public af: AngularFirestore, public db: AngularFireDatabase, public angularAuth: AngularFireAuth, public universityService: UniversityService) {
   }
 
   public getSubjects(): Observable<Array<ISubject>> {
@@ -32,10 +33,11 @@ export class SubjectService {
   }
 
   public async createSubject(subject: ISubject): Promise<void> {
+    const currentUser = firebase.auth().currentUser;
     let getterTime = new Date();
     subject.modifiedDate = getterTime.getTime();
-    const currentUser = firebase.auth().currentUser;
     subject.id = this.af.createId();
+    await this.universityService.courseResolver(subject);
     return await this.af.collection(SubjectService.SUBJECT_KEY).doc(subject.id).set(subject);
   }
 
@@ -43,6 +45,7 @@ export class SubjectService {
     let getterTime = new Date();
     subject.modifiedDate = getterTime.getTime();
     const currentUser = firebase.auth().currentUser;
+    await this.universityService.courseResolver(subject);
     return await this.af.collection(SubjectService.SUBJECT_KEY).doc(subject.id).set(subject);
   }
 
@@ -50,4 +53,4 @@ export class SubjectService {
     const currentUser = firebase.auth().currentUser;
     return await this.af.collection(SubjectService.SUBJECT_KEY).doc(subjectId).delete();
   }
-}
+  }
