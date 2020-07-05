@@ -55,22 +55,27 @@
           <ng-container [formGroupName]="i">
             <td>{{ courseTeacher.get('id').value }}</td>
             <td>
-              <input type="text" class="form-control" name="teacherName-{{i}}" id="teacherName-{{i}}" formControlName="teacherName"/>
+              <input type="text" class="form-control" name="teacherName-{{i}}" id="teacherName-{{i}}"
+                     formControlName="teacherName"/>
             </td>
             <td>
-              <input type="text" class="form-control" name="teacherSpecialization-{{i}}" id="teacherSpecialization-{{i}}" formControlName="teacherSpecialization"/>
+              <input type="text" class="form-control" name="teacherSpecialization-{{i}}"
+                     id="teacherSpecialization-{{i}}" formControlName="teacherSpecialization"/>
             </td>
 
             <td>
-              <input type="date" class="form-control" name="startDate-{{i}}" id="startDate-{{i}}" formControlName="startDate"/>
+              <input type="date" class="form-control" name="startDate-{{i}}" id="startDate-{{i}}"
+                     formControlName="startDate"/>
             </td>
             <td>
-              <input type="date" class="form-control" name="endDate-{{i}}" id="endDate-{{i}}" formControlName="endDate"/>
+              <input type="date" class="form-control" name="endDate-{{i}}" id="endDate-{{i}}"
+                     formControlName="endDate"/>
             </td>
             <td>
               <select class="form-control">
                 <option value="new"></option>
-                <option *ngFor="let teacher of allTeachers" class="form-control" value="PM" (click)="fillFields(teacher,i)">{{teacher.teacherName}}</option>
+                <option *ngFor="let teacher of allTeachers" class="form-control" value="PM"
+                        (click)="fillFieldsTeacher(teacher,i)">{{teacher.teacherName}}</option>
               </select>
             </td>
             <td class="text-right">
@@ -85,6 +90,64 @@
         </tbody>
       </table>
     </div>
+
+    <br/>
+
+    <h4 id="subject-heading">
+      <span>Course Subject</span>
+      <button type="button" id="new-subject-btn" class="btn btn-primary float-right" (click)="addCourseSubject()">
+        <i class="fa fa-plus"></i>
+        <span>
+          Add new Subject
+        </span>
+      </button>
+    </h4>
+
+    <br/>
+    <div class="table-responsive" *ngIf="courseSubjectsControls.length > 0">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+        <tr>
+          <th><span>ID</span></th>
+          <th><span>Name</span></th>
+          <th><span>Type</span></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let courseSubject of courseSubjectsControls; index as i;" formArrayName="courseSubjects">
+          <ng-container [formGroupName]="i">
+            <td>{{ courseSubject.get('id').value }}</td>
+            <td>
+              <input type="text" class="form-control" name="subjectName-{{i}}" id="subjectName-{{i}}"
+                     formControlName="subjectName"/>
+            </td>
+            <td>
+              <input type="text" class="form-control" name="type-{{i}}"
+                     id="type-{{i}}" formControlName="type"/>
+            </td>
+
+            <td>
+              <select class="form-control">
+                <option value="new"></option>
+                <option *ngFor="let subject of allSubjects" class="form-control" value="PM"
+                        (click)="fillFieldsSubject(subject,i)">{{subject.subjectName}}</option>
+              </select>
+            </td>
+            <td class="text-right">
+              <div class="btn-group flex-btn-group-container">
+                <button type="button" class="btn btn-danger btn-sm" (click)="deleteCourseSubject(i)">
+                  <i class="fa fa-times"></i>
+                  <span class="d-none d-md-inline"> Delete</span>
+                </button>
+              </div>
+            </td>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+
     <div class="row margin-top-10">
       <div class="col-12">
         <re-captcha formControlName="formRecaptcha"></re-captcha>
