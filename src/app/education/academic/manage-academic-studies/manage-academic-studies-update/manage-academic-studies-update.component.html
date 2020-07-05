@@ -2,78 +2,36 @@
   <form [formGroup]="manageAcadStudForm" (ngSubmit)="saveProject()">
     <div class="form-row">
       <div class="form-group col-md-6 mb-6">
-        <label for="inputcertName">Certification Name</label>
-        <input type="text" class="form-control" [ngClass]="manageAcadStudForm.get('certName').invalid && (manageAcadStudForm.get('certName').dirty || manageAcadStudForm.get('certName').touched) && manageAcadStudForm.controls['certName'].errors ? 'is-invalid' : ''"
-               id="inputcertName" placeholder="Project Name" formControlName="CertName">
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('certName').invalid && (manageAcadStudForm.get('certName').dirty || manageAcadStudForm.get('certName').touched)">
-          <span *ngIf="manageAcadStudForm.controls['certName'].hasError('required')">This field is required</span>
-        </div>
-      </div>
-      <div class="form-group col-md-6 mb-6">
-        <label for="inputProjectAlias">Project Alias</label>
-        <input type="text" class="form-control" [ngClass]="manageAcadStudForm.get('projectAlias').invalid && (manageAcadStudForm.get('projectAlias').dirty || manageAcadStudForm.get('projectAlias').touched) && manageAcadStudForm.controls['projectAlias'].errors ? 'is-invalid' : ''"
-               id="inputProjectAlias" placeholder="Project Alias" formControlName="projectAlias">
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('projectAlias').invalid && (manageAcadStudForm.get('projectAlias').dirty || manageAcadStudForm.get('projectAlias').touched)">
-          <span *ngIf="manageAcadStudForm.controls['projectAlias'].hasError('required')">This field is required</span>
-          <span *ngIf="manageAcadStudForm.controls['projectAlias'].hasError('maxlength')">Max length of this field is 10 characters</span>
+        <label for="inputFormation">Formation</label>
+        <input type="text" class="form-control" id="inputFormation" formControlName="formation" placeholder="Formation"
+               [ngClass]="isControlInvalid('formation') ? 'is-invalid' : '' ">
+        <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('formation', 'required')">
+          This field is required
         </div>
       </div>
     </div>
     <div class="form-row">
-      <div class="form-group col-md-6 mb-6">
-        <label for="inputCompanyName">Company Name</label>
-        <input type="text" class="form-control" [ngClass]="manageAcadStudForm.get('companyName').invalid && (manageAcadStudForm.get('companyName').dirty || manageAcadStudForm.get('companyName').touched) && manageAcadStudForm.controls['companyName'].errors ? 'is-invalid' : ''"
-               id="inputCompanyName" placeholder="Company Name" formControlName="companyName">
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('companyName').invalid && (manageAcadStudForm.get('companyName').dirty || manageAcadStudForm.get('companyName').touched)">
-          <span *ngIf="manageAcadStudForm.controls['companyName'].hasError('required')">This field is required</span>
+      <div class="form-group col-md-3 mb-3">
+        <label for="inputEducationalInstitution">Educational Institution</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="inputEducationalInstitution" formControlName="educationalInstitution"
+                 placeholder="Educational Institution"
+                 [ngClass]="isControlInvalid('educationalInstitution') ? 'is-invalid' : '' ">
+          <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('educationalInstitution', 'required')">
+            This field is required
+          </div>
         </div>
       </div>
-      <div class="form-group col-md-6 mb-6">
-        <label for="inputCompanyAddress">Company Address</label>
-        <input type="text" class="form-control" [ngClass]="manageAcadStudForm.get('companyAddress').invalid && (manageAcadStudForm.get('companyAddress').dirty || manageAcadStudForm.get('companyAddress').touched) && manageAcadStudForm.controls['companyAddress'].errors ? 'is-invalid' : ''"
-               id="inputCompanyAddress" placeholder="Company Address" formControlName="companyAddress">
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('companyAddress').invalid && (manageAcadStudForm.get('companyAddress').dirty || manageAcadStudForm.get('companyAddress').touched)">
-          <span *ngIf="manageAcadStudForm.controls['companyAddress'].hasError('required')">This field is required</span>
+      <div class="form-group col-md-3 mb-3">
+        <label for="inputGrade">Grade</label>
+        <div class="input-group">
+          <input type="number" class="form-control" id="inputGrade" formControlName="grade"
+                 placeholder="Grade (0-20)"
+                 [ngClass]="isControlInvalid('grade') ? 'is-invalid' : '' ">
+          <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('grade', 'required')">
+            This field needs a number
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6 mb-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" [ngClass]="manageAcadStudForm.get('city').invalid && (manageAcadStudForm.get('city').dirty || manageAcadStudForm.get('city').touched) && manageAcadStudForm.controls['city'].errors ? 'is-invalid' : ''"
-               id="inputCity" placeholder="City" formControlName="city">
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('city').invalid && (manageAcadStudForm.get('city').dirty || manageAcadStudForm.get('city').touched)">
-          <span *ngIf="manageAcadStudForm.controls['city'].hasError('required')">This field is required</span>
-        </div>
-      </div>
-      <div class="form-group col-md-4 mb-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control" [ngClass]="manageAcadStudForm.get('state').invalid && (manageAcadStudForm.get('state').dirty || manageAcadStudForm.get('state').touched) && manageAcadStudForm.controls['state'].errors ? 'is-invalid' : ''"
-                formControlName="state">
-          <option>Lisboa</option>
-          <option>Amadora</option>
-          <option>Mafra</option>
-        </select>
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('state').invalid && (manageAcadStudForm.get('state').dirty || manageAcadStudForm.get('state').touched)">
-          <span *ngIf="manageAcadStudForm.controls['state'].hasError('required')">This field is required</span>
-        </div>
-      </div>
-      <div class="form-group col-md-2 mb-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" [ngClass]="manageAcadStudForm.get('zip').invalid && (manageAcadStudForm.get('zip').dirty || manageAcadStudForm.get('zip').touched) && manageAcadStudForm.controls['zip'].errors ? 'is-invalid' : ''"
-               id="inputZip" placeholder="XXXX-ZZZ" formControlName="zip">
-        <div class="invalid-feedback" *ngIf="manageAcadStudForm.get('zip').invalid && (manageAcadStudForm.get('zip').dirty || manageAcadStudForm.get('zip').touched)">
-          <span *ngIf="manageAcadStudForm.controls['zip'].hasError('required')">This field is required</span>
-          <span *ngIf="manageAcadStudForm.controls['zip'].hasError('maxlength')">Max length of this field is 8 characters</span>
-        </div>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="personnelProjectCheckBox" formControlName="personnelProject">
-        <label class="form-check-label" for="personnelProjectCheckBox">
-          Personnel Project
-        </label>
       </div>
     </div>
     <hr>

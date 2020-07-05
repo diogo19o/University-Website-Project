@@ -8,6 +8,8 @@ import {ManageCertificationsUpdateComponent} from './certifications/manage-certi
 import {ManageAcademicStudiesUpdateComponent} from './academic/manage-academic-studies/manage-academic-studies-update/manage-academic-studies-update.component';
 import {ManageCertificationsDetailsComponent} from './certifications/manage-certifications/manage-certifications-details/manage-certifications-details.component';
 import {CertificationResolver} from './certifications/certification.resolver';
+import {ManageAcademicStudiesDetailsComponent} from './academic/manage-academic-studies/manage-academic-studies-details/manage-academic-studies-details.component';
+import {AcademicService} from './academic/academic.service';
 
 const routes: Routes = [
   {
@@ -22,10 +24,21 @@ const routes: Routes = [
         component: ManageAcademicStudiesComponent
       },
       {
-        path: 'manageacademicstudies/new',
+        path: 'manageacademicstudies',
+        component: ManageAcademicStudiesComponent
+      },
+      {
+        path: 'manageacademicstudies/:id/edit',
         component: ManageAcademicStudiesUpdateComponent,
         resolve: {
-          academic: CertificationResolver
+          academic: AcademicService
+        }
+      },
+      {
+        path: 'manageacademicstudies/:id/view',
+        component: ManageAcademicStudiesDetailsComponent,
+        resolve: {
+          academic: AcademicService
         }
       },
       {

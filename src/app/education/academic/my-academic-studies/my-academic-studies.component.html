@@ -3,4 +3,21 @@
     <span>My Academic Studies</span>
   </h2>
   <hr>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="academics?.length === 0">
+    <span>No Academic Studies found</span>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-4 mt-3" *ngFor="let academic of academics; let i = index">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ academic.formation }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Formation: {{ academic.educationalInstitution }}</h6>
+          <p class="card-text">Grade: {{ academic.grade }}</p>
+          <a class="card-link" [routerLink]="['/education/manageacademicstudies', academic.id, 'view']">View details</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
