@@ -13,6 +13,7 @@ import {TeacherService} from '../../teacher/teacher.service';
 })
 export class ManageCoursesComponent implements OnInit {
   public courses?: ICourse[] = [];
+  public searchText: string = "";
 
   constructor(protected modalService: NgbModal, private spinner: NgxSpinnerService, private  courseService: CourseService, private teacherService: TeacherService) {
   }
@@ -29,6 +30,10 @@ export class ManageCoursesComponent implements OnInit {
 
   trackId(index: number, item: ICourse): number {
     return Number(item.id);
+  }
+
+  public searchField(): void {
+    this.searchText = (<HTMLInputElement>document.getElementById("searchTextInput")).value;
   }
 
   delete(course: ICourse): void {

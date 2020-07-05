@@ -37,23 +37,31 @@
           <th><span>ID</span></th>
           <th><span>Course Name</span></th>
           <th><span>Duration Years</span></th>
-          <th><span>Select Existing</span></th>
+          <th><span>Select Existing *</span></th>
           <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let subjectCourse of subjectCoursesControls; index as i;" formArrayName="subjectCourses">
+        <tr *ngFor="let subjectCourse of subjectCoursesControls; let i = ih;" formArrayName="subjectCourses">
           <ng-container [formGroupName]="i">
             <td>{{ subjectCourse.get('id').value }}</td>
             <td>
-              <input type="text" class="form-control" name="courseName-{{i}}" id="courseName-{{i}}" formControlName="courseName"/>
+              <input type="text" class="form-control" name="courseName-{{i}}" id="courseName-{{i}}" formControlName="courseName"
+                     [ngClass]="isControlInvalid('courseName') ? 'is-invalid' : '' " disabled/>
+              <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('type', 'required')">
+                This field is required
+              </div>
             </td>
             <td>
-              <input type="text" class="form-control" name="durationYear-{{i}}" id="durationYear-{{i}}" formControlName="durationYear"/>
+              <input type="text" class="form-control" name="durationYear-{{i}}" id="durationYear-{{i}}" formControlName="durationYear"
+                     [ngClass]="isControlInvalid('durationYear') ? 'is-invalid' : '' " disabled/>
+              <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('type', 'required')">
+                This field is required
+              </div>
             </td>
             <td>
               <select class="form-control">
-                <option value="new"></option>
+                <option></option>
                 <option *ngFor="let course of allCourses" class="form-control" (click)="fillFieldsCourse(course,i)">{{course.courseName}}</option>
               </select>
             </td>

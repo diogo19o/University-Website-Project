@@ -18,6 +18,7 @@ export class ManageSubjectsUpdateComponent implements OnInit {
   public allCourses: Array<ICourse> = new Array<ICourse>();
   manageSubjectsForm: FormGroup;
   isSaving: boolean;
+  ih: number = 1;
 
   constructor(
     protected activatedRoute: ActivatedRoute,
@@ -30,7 +31,7 @@ export class ManageSubjectsUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
-    this.courseService.getCourses().subscribe((courses: Array<ITeacher>) => {
+    this.courseService.getCourses().subscribe((courses: Array<ICourse>) => {
       this.allCourses = courses;
     });
     this.activatedRoute.data.subscribe(({subject}) => {
@@ -46,9 +47,7 @@ export class ManageSubjectsUpdateComponent implements OnInit {
   public isControlInvalidAndHasError(formControlName: string, keyError: string): boolean {
     return this.isControlInvalid(formControlName) && this.manageSubjectsForm.get(formControlName).errors
       && this.manageSubjectsForm.get(formControlName).hasError(keyError);
-  }
-
-  2;
+  };
 
   saveSubject(): void {
     this.isSaving = true;

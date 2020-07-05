@@ -17,7 +17,9 @@ export class TeacherService {
 
   private unsubscribe: Subject<void> = new Subject<void>();
 
-  constructor(public af: AngularFirestore, public db: AngularFireDatabase, public angularAuth: AngularFireAuth) {
+  constructor(public af: AngularFirestore,
+              public db: AngularFireDatabase,
+              public angularAuth: AngularFireAuth) {
   }
 
   public getTeachers(): Observable<Array<ITeacher>> {

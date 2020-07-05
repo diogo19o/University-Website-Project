@@ -8,6 +8,8 @@
     </button>
   </h2>
 
+  <input id="searchTextInput" type="text" placeholder="Search" #searchTextInput (input)="searchField()"/>
+
   <div class="alert alert-warning" id="no-result" *ngIf="courses?.length === 0">
     <span>No courses found</span>
   </div>
@@ -23,6 +25,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let course of courses ;trackBy: trackId">
+        <ng-container *ngIf="searchText.length === 0 || (course.id.substr(0, searchText.length) === searchText || course.courseName.substr(0,searchText.length) === searchText || course.durationYear === searchText)" >
         <td><a [routerLink]="[course.id, 'view']">{{ course.id }}</a></td>
         <td>{{ course.courseName }}</td>
         <td>{{ course.durationYear }}</td>
@@ -44,6 +47,7 @@
             </button>
           </div>
         </td>
+        </ng-container>
       </tr>
       </tbody>
     </table>

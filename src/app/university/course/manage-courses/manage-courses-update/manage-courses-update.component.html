@@ -14,14 +14,14 @@
       <div class="form-group col-md-3 mb-3">
         <label for="inputDurationYear">Duration</label>
         <div class="input-group">
-          <input type="text" class="form-control" id="inputDurationYear" formControlName="durationYear"
+          <input type="number" class="form-control" id="inputDurationYear" formControlName="durationYear"
                  placeholder="Duration"
                  [ngClass]="isControlInvalid('durationYear') ? 'is-invalid' : '' ">
           <div class="input-group-append">
             <span class="input-group-text">Year(s)</span>
           </div>
           <div class="invalid-feedback" *ngIf="isControlInvalidAndHasError('durationYear', 'required')">
-            This field is required
+            This field needs a number
           </div>
         </div>
       </div>
